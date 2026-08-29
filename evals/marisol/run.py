@@ -10,12 +10,12 @@ from app.ghostbird.models import SourceDocument
 from app.ghostbird.model_runner import StructuredModel
 from app.ghostbird.repository import InMemoryEvidenceRepository
 from app.ghostbird.service import GhostbirdService
+from app.ghostbird.synthetic import CLIENT_IDS, load_client_sources
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_DIR = ROOT / "Ghostbird — Synthetic Client Data for Hackathon"
 FIXTURE_DIR = ROOT / "evals" / "marisol"
-MARISOL_CLIENT_ID = "cli_00000000000000000000000000000001"
+MARISOL_CLIENT_ID = CLIENT_IDS["vance_kinder"]
 OutputModel = TypeVar("OutputModel", bound=BaseModel)
 
 
@@ -49,48 +49,7 @@ class RecordedMarisolModel:
 
 
 def load_marisol_sources() -> list[SourceDocument]:
-    paths = [
-        DATA_DIR / "transcripts" / "vance_kinder_call_1.json",
-        DATA_DIR / "transcripts" / "vance_kinder_call_2.json",
-        DATA_DIR / "emails" / "vance_kinder_thread_1.json",
-        DATA_DIR / "emails" / "vance_kinder_thread_2.json",
-    ]
-    return [_load_source(path) for path in paths]
-
-
-def _load_source(path: Path) -> SourceDocument:
-    data = json.loads(path.read_text())
-    if "sentences" in data:
-        text = "\n".join(
-            f"[{sentence['start_time']:.2f}-{sentence['end_time']:.2f}] "
-            f"{sentence['speaker_name']}: {sentence['text']}"
-            for sentence in data["sentences"]
-        )
-        return SourceDocument(
-            client_id=MARISOL_CLIENT_ID,
-            source_id=data["id"],
-            title=data["title"],
-            source_type="call_transcript",
-            text=text,
-            purpose="Monthly Ghostbird content interview",
-            captured_at=data["dateString"],
-            metadata={"synthetic": True, "meeting_link": data["meetingLink"]},
-        )
-
-    text = "\n\n".join(
-        f"[{message['date']}] {message['sender']}:\n{message['plaintext_body']}"
-        for message in data["messages"]
-    )
-    return SourceDocument(
-        client_id=MARISOL_CLIENT_ID,
-        source_id=data["threadId"],
-        title=data["subject"],
-        source_type="email_thread",
-        text=text,
-        purpose="Client communication",
-        captured_at=data["messages"][0]["date"],
-        metadata={"synthetic": True},
-    )
+    return load_client_sources("vance_kinder", MARISOL_CLIENT_ID)
 
 
 async def evaluate(

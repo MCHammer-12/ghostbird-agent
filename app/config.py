@@ -41,8 +41,10 @@ class Settings(BaseSettings):
     )
 
     # Ghostbird agent auth: JSON list of {"key", "principal_id", "client_ids"}.
-    # When empty, API_KEY above is accepted for every client.
-    api_keys: list[APIKeyRecord] = Field(default_factory=list)
+    # When empty, API_KEY above is accepted for every client. NoDecode hands the
+    # raw string to parse_api_keys, so a blank API_KEYS= means "unset" rather
+    # than a JSON decode error at startup.
+    api_keys: Annotated[list[APIKeyRecord], NoDecode] = Field(default_factory=list)
 
     # LLM
     llm_provider: LLMProvider = LLMProvider.OPENAI
