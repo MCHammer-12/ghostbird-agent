@@ -135,13 +135,32 @@ class GhostbirdService:
                 "evidence": [record.model_dump(mode="json") for record in evidence],
             },
         )
+        allowed = {record.evidence_id for record in evidence}
+        evidence_kinds = {record.evidence_id: record.kind for record in evidence}
+        if not verify_output:
+            ideas = []
+            for idea in result.ideas[: request.count]:
+                references = [
+                    reference
+                    for reference in idea.supporting_evidence
+                    if reference.evidence_id in allowed
+                ]
+                if not references:
+                    continue
+                basis = evidence_kinds[references[0].evidence_id]
+                ideas.append(
+                    idea.model_copy(
+                        update={"basis": basis, "supporting_evidence": references}
+                    )
+                )
+            if not ideas:
+                raise IntegrationError("ghostbird", "Ideation returned no grounded ideas")
+            return result.model_copy(update={"ideas": ideas})
         if len(result.ideas) != request.count:
             raise IntegrationError(
                 "ghostbird",
                 f"Ideation returned {len(result.ideas)} ideas; expected {request.count}",
             )
-        allowed = {record.evidence_id for record in evidence}
-        evidence_kinds = {record.evidence_id: record.kind for record in evidence}
         for idea in result.ideas:
             self._verify_references(idea, allowed)
             if not any(
@@ -152,8 +171,6 @@ class GhostbirdService:
                     "ghostbird",
                     f"Idea basis {idea.basis} has no supporting evidence of that kind",
                 )
-        if not verify_output:
-            return result
         verification = await self._verify_output(result, evidence)
         self._require_valid_output(verification)
         return result.model_copy(update={"verification": verification})

@@ -344,8 +344,6 @@ $('#generateButton').addEventListener('click', async () => {
     $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
     showToast(activeMode === 'enrich' ? 'Live enrichment complete' : '10 live ideas generated');
   } catch (error) {
-    outputsVisible = false;
-    syncWorkspaceOutputs();
     showToast(`Agent error: ${error.message}`);
   } finally {
     button.disabled = false;
