@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from app.config import get_settings
 from app.errors import register_error_handlers
 from app.observability import RequestContextMiddleware, configure_logging
-from app.routers import clients, ghostbird, health, tags, uploads
+from app.routers import clients, demo, ghostbird, health, tags, uploads
 
 settings = get_settings()
 static_directory = Path(__file__).parent / "static"
@@ -41,6 +41,7 @@ app.include_router(health.router)
 app.include_router(clients.router)
 app.include_router(uploads.router)
 app.include_router(tags.router)
+app.include_router(demo.router)
 
 app.mount("/static", StaticFiles(directory=static_directory), name="static")
 

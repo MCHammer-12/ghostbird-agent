@@ -191,12 +191,22 @@ class SupabaseEvidenceRepository:
         await self.client.upsert(self.TABLES[kind], rows, on_conflict="id")
 
     async def get_voice_profile(self, client_id: str) -> VoiceProfile | None:
-        rows = await self.client.select(
-            "clients",
-            "id,writing_style,writing_style_prompt_version,updated_at",
-            {"id": client_id},
-            1,
-        )
+        try:
+            rows = await self.client.select(
+                "clients",
+                "id,writing_style,writing_style_prompt_version,updated_at",
+                {"id": client_id},
+                1,
+            )
+        except Exception as error:
+            if not _missing_agent_schema(error):
+                raise
+            rows = await self.client.select(
+                "clients",
+                "id,writing_style,updated_at",
+                {"id": client_id},
+                1,
+            )
         if not rows:
             return None
         return VoiceProfile(
@@ -230,15 +240,20 @@ class SupabaseEvidenceRepository:
         return records
 
     async def search_evidence(self, client_id: str, query: str, top_k: int) -> list[StoredEvidence]:
-        records: list[StoredEvidence] = []
-        for kind, table in self.TABLES.items():
-            rows = await self.client.select(
-                table,
-                "*,uploads!inner(ingestion_status)",
-                {"client_id": client_id, "uploads.ingestion_status": "ready"},
-                top_k,
-            )
-            records.extend(_rows_to_evidence(kind, rows))
+        try:
+            records: list[StoredEvidence] = []
+            for kind, table in self.TABLES.items():
+                rows = await self.client.select(
+                    table,
+                    "*,uploads!inner(ingestion_status)",
+                    {"client_id": client_id, "uploads.ingestion_status": "ready"},
+                    top_k,
+                )
+                records.extend(_rows_to_evidence(kind, rows))
+        except Exception as error:
+            if not _missing_agent_schema(error):
+                raise
+            records = await self._seeded_upload_evidence(client_id)
         query_terms = set(_terms(query))
         records.sort(
             key=lambda record: len(query_terms & set(_terms(record.excerpt))) + record.confidence,
@@ -251,18 +266,31 @@ class SupabaseEvidenceRepository:
         kind = prefix_to_kind.get(evidence_id[:3])
         if kind is None:
             return None
-        rows = await self.client.select(
-            self.TABLES[kind],
-            "*,uploads!inner(ingestion_status)",
-            {
-                "client_id": client_id,
-                "id": evidence_id,
-                "uploads.ingestion_status": "ready",
-            },
-            1,
-        )
-        converted = _rows_to_evidence(kind, rows)
-        return converted[0] if converted else None
+        try:
+            rows = await self.client.select(
+                self.TABLES[kind],
+                "*,uploads!inner(ingestion_status)",
+                {
+                    "client_id": client_id,
+                    "id": evidence_id,
+                    "uploads.ingestion_status": "ready",
+                },
+                1,
+            )
+            converted = _rows_to_evidence(kind, rows)
+            return converted[0] if converted else None
+        except Exception as error:
+            if not _missing_agent_schema(error):
+                raise
+            records = await self._seeded_upload_evidence(client_id)
+            return next((record for record in records if record.evidence_id == evidence_id), None)
+
+    async def _seeded_upload_evidence(self, client_id: str) -> list[StoredEvidence]:
+        uploads = await self.client.select("uploads", "*", {"client_id": client_id}, 100)
+        records: list[StoredEvidence] = []
+        for upload in uploads:
+            records.extend(_evidence_from_seeded_upload(client_id, upload))
+        return records
 
 
 def _terms(text: str) -> list[str]:
@@ -302,3 +330,129 @@ def _rows_to_evidence(kind: str, rows: list[dict]) -> list[StoredEvidence]:
         )
         for row in rows
     ]
+
+
+def _missing_agent_schema(error: Exception) -> bool:
+    message = str(error)
+    return any(code in message for code in ("PGRST202", "PGRST205", "42P01", "42703"))
+
+
+def _evidence_from_seeded_upload(client_id: str, upload: dict) -> list[StoredEvidence]:
+    upload_id = upload["id"]
+    text = upload.get("text") or ""
+    summary = (upload.get("summary") or "").strip()
+    metadata = upload.get("metadata") or {}
+    title = metadata.get("title") or metadata.get("subject") or summary[:80] or "Client source"
+    records: list[StoredEvidence] = []
+
+    if len(summary) >= 80:
+        records.append(
+            _seeded_record(
+                "anecdote",
+                client_id,
+                upload_id,
+                summary,
+                {
+                    "summary": summary,
+                    "full_story": summary,
+                    "narrator": "client",
+                    "people": [],
+                    "setup": summary,
+                    "tension": "See source context",
+                    "action": "See source context",
+                    "outcome": "See source context",
+                    "lesson": None,
+                    "related_evidence_hints": [],
+                    "source_title": title,
+                },
+            )
+        )
+
+    metric_sentence = next(
+        (
+            sentence.strip()
+            for sentence in re.split(r"(?<=[.!?])\s+|\n+", summary)
+            if re.search(
+                r"(?:\$?\d[\d,.]*%?|\b(?:one|two|three|four|five|six|seven|eight|nine|ten|twenty|forty)\b)",
+                sentence,
+                re.IGNORECASE,
+            )
+        ),
+        None,
+    )
+    if metric_sentence:
+        value = re.search(
+            r"\$?\d[\d,.]*%?|\b(?:one|two|three|four|five|six|seven|eight|nine|ten|twenty|forty)\b",
+            metric_sentence,
+            re.IGNORECASE,
+        )
+        records.append(
+            _seeded_record(
+                "metric",
+                client_id,
+                upload_id,
+                metric_sentence,
+                {
+                    "metric_type": "seeded_source_detail",
+                    "value_text": value.group(0) if value else "",
+                    "normalized_value": None,
+                    "unit": None,
+                    "subject": "client",
+                    "context": metric_sentence,
+                    "occurred_at": None,
+                    "source_title": title,
+                },
+            )
+        )
+
+    quote = next(
+        (
+            (speaker.strip(), words.strip())
+            for speaker, words in re.findall(r"(?m)^([^:\n]{2,80}):\s*(.{30,500})$", text)
+            if speaker.strip().lower() not in {"jarrich grey", "ghostbird"}
+        ),
+        None,
+    )
+    if quote:
+        speaker, words = quote
+        records.append(
+            _seeded_record(
+                "quote",
+                client_id,
+                upload_id,
+                words,
+                {
+                    "quote_text": words,
+                    "speaker": speaker,
+                    "speaker_type": "client",
+                    "quote_type": "direct",
+                    "context": summary or title,
+                    "source_title": title,
+                },
+            )
+        )
+
+    return records
+
+
+def _seeded_record(
+    kind: str,
+    client_id: str,
+    upload_id: str,
+    excerpt: str,
+    data: dict,
+) -> StoredEvidence:
+    prefix = {"metric": "met", "quote": "quo", "anecdote": "ane"}[kind]
+    digest = hashlib.sha256(f"{client_id}|{upload_id}|{kind}|{excerpt}".encode()).hexdigest()[:32]
+    return StoredEvidence(
+        evidence_id=f"{prefix}_{digest}",
+        client_id=client_id,
+        source_id=upload_id,
+        kind=kind,
+        excerpt=excerpt,
+        source_location="seeded-upload",
+        scope="personal",
+        confidence=0.75,
+        review_status="proposed",
+        data=data,
+    )

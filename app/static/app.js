@@ -89,6 +89,7 @@ const evidence = {
 
 const clients = {
   vance_kinder: {
+    dbId: "cli_927fa9c0e2db4ce4b675505eca2a9fa2",
     name: "Marisol Vance",
     firstName: "Marisol",
     company: "Vance & Kinder",
@@ -118,21 +119,23 @@ Short to medium sentences. Conversational openers. She will say “honestly,” 
 Her edits favor exact details over round numbers. She explicitly preferred “nine years with their previous supplier” to “a decade.”`,
   },
   bloom_bar: {
+    dbId: "cli_3184cf91aced4843a660ae57d0dbd92e",
     name: "Priya Chandrasekhar",
     firstName: "Priya",
     company: "Bloom & Bar",
     initials: "PC",
     pronoun: "her.",
-    sourceCount: 0,
+    sourceCount: 4,
     voice: "# Priya Chandrasekhar — voice profile\n\nAdd approved client material to begin an evidence-backed profile.\n\n## Notes for review\n- Keep writing guidance traceable to approved sources.\n- Separate spoken voice from published LinkedIn style.",
   },
   ridgeline: {
+    dbId: "cli_7499c9e69fc44d43b33df7287a9f7971",
     name: "Desmond Okafor",
     firstName: "Desmond",
     company: "Ridgeline",
     initials: "DO",
     pronoun: "him.",
-    sourceCount: 0,
+    sourceCount: 2,
     voice: "# Desmond Okafor — voice profile\n\nAdd approved client material to begin an evidence-backed profile.\n\n## Notes for review\n- Keep writing guidance traceable to approved sources.\n- Separate spoken voice from published LinkedIn style.",
   },
 };
@@ -154,7 +157,7 @@ document.addEventListener("click", (event) => {
 let activeClient = "vance_kinder";
 let outputsVisible = false;
 function isPreparedClient() {
-  return activeClient === "vance_kinder";
+  return Boolean(clients[activeClient].dbId);
 }
 function syncWorkspaceOutputs() {
   const visible = isPreparedClient() && outputsVisible;
@@ -254,11 +257,100 @@ function selectMode(nextMode) {
 }
 $$('.mode').forEach((button) => button.addEventListener('click', () => selectMode(button.dataset.mode)));
 
-$('#generateButton').addEventListener('click', () => {
-  outputsVisible = true;
-  syncWorkspaceOutputs();
-  $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  showToast(activeMode === 'enrich' ? 'Your post is ready to enrich' : '10 ideas are ready to explore');
+const dynamicEvidence = new Map();
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"]/g, (character) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+  })[character]);
+}
+
+function paragraphs(value) {
+  return String(value ?? '').split(/\n\s*\n/).filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('');
+}
+
+async function apiRequest(path, body) {
+  const response = await fetch(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.detail || payload.error?.message || `Request failed (${response.status})`);
+  return payload;
+}
+
+async function loadEvidence(evidenceId) {
+  if (dynamicEvidence.has(evidenceId)) return dynamicEvidence.get(evidenceId);
+  const clientId = clients[activeClient].dbId;
+  const response = await fetch(`/demo/v1/clients/${clientId}/evidence/${evidenceId}`);
+  if (!response.ok) return null;
+  const record = await response.json();
+  dynamicEvidence.set(evidenceId, record);
+  return record;
+}
+
+async function renderEvidenceCards(referenceIds) {
+  const records = (await Promise.all(referenceIds.slice(0, 3).map(loadEvidence))).filter(Boolean);
+  $('.evidence-grid').innerHTML = records.map((record) => {
+    const label = record.kind === 'anecdote' ? 'Story' : record.kind;
+    const title = record.data.source_title || `${label} from client source`;
+    return `<article class="evidence-card ${record.kind === 'anecdote' ? 'story' : record.kind}-card">
+      <div class="evidence-meta"><span class="pill ${record.kind === 'anecdote' ? 'story' : record.kind}">${escapeHtml(label)}</span><button class="breadcrumb" data-evidence-id="${escapeHtml(record.evidence_id)}">Source context <span>↗</span></button></div>
+      <h3>${escapeHtml(title)}</h3><p>${escapeHtml(record.excerpt)}</p>
+      <button class="inline-link" data-evidence-id="${escapeHtml(record.evidence_id)}">Open source context <span>→</span></button>
+    </article>`;
+  }).join('');
+}
+
+async function renderEnrichment(result, originalDraft) {
+  const baseline = $('.comparison-grid[data-mode-output="enrich"] .baseline-card');
+  baseline.innerHTML = `<div class="comparison-label"><span>Original draft</span><small>Without Ghostbird context</small></div>${paragraphs(originalDraft)}<footer>No retrieved client context added</footer>`;
+  const context = $('.comparison-grid[data-mode-output="enrich"] .context-card');
+  context.innerHTML = `<div class="comparison-label"><span>With Ghostbird context</span><small>Live agent output</small></div>${paragraphs(result.enriched_post)}<footer><span>✦</span> ${result.references.length} grounded source reference${result.references.length === 1 ? '' : 's'}</footer>`;
+  await renderEvidenceCards([...new Set(result.references.map((reference) => reference.evidence_id))]);
+}
+
+async function renderIdeas(result) {
+  const list = $('.grounded-ideas');
+  list.innerHTML = result.ideas.map((idea, index) => {
+    const reference = idea.supporting_evidence[0];
+    return `<li><span class="idea-basis ${escapeHtml(idea.basis)}">${escapeHtml(idea.basis)}</span><h3>${escapeHtml(idea.title)}</h3><p>${escapeHtml(idea.angle)} ${reference ? `<button class="citation" data-evidence-id="${escapeHtml(reference.evidence_id)}">[${index + 1}]</button>` : ''}</p><small>${escapeHtml(idea.hook)}</small></li>`;
+  }).join('');
+  const referenceIds = result.ideas.flatMap((idea) => idea.supporting_evidence.map((reference) => reference.evidence_id));
+  await renderEvidenceCards([...new Set(referenceIds)]);
+}
+
+$('#generateButton').addEventListener('click', async () => {
+  const button = $('#generateButton');
+  const label = $('#generateLabel');
+  const originalLabel = label.textContent;
+  const input = $('#writingPrompt').value.trim();
+  if (!input) return showToast('Add a draft or topic first');
+  button.disabled = true;
+  label.textContent = 'Running Ghostbird agents…';
+  try {
+    const clientId = clients[activeClient].dbId;
+    if (activeMode === 'enrich') {
+      const result = await apiRequest(`/demo/v1/clients/${clientId}/posts:enrich`, { draft_text: input });
+      await renderEnrichment(result, input);
+    } else {
+      const result = await apiRequest(`/demo/v1/clients/${clientId}/posts:ideate`, { topic: input, count: 10 });
+      await renderIdeas(result);
+    }
+    outputsVisible = true;
+    syncWorkspaceOutputs();
+    $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast(activeMode === 'enrich' ? 'Live enrichment complete' : '10 live ideas generated');
+  } catch (error) {
+    outputsVisible = false;
+    syncWorkspaceOutputs();
+    showToast(`Agent error: ${error.message}`);
+  } finally {
+    button.disabled = false;
+    label.textContent = originalLabel;
+  }
 });
 
 let returnFocus;
@@ -325,6 +417,23 @@ function openDrawer(key, trigger) {
   showOverlay($('#evidenceDrawer'), trigger);
 }
 $$('[data-evidence]').forEach((button) => button.addEventListener('click', () => openDrawer(button.dataset.evidence, button)));
+document.addEventListener('click', async (event) => {
+  const trigger = event.target.closest('[data-evidence-id]');
+  if (!trigger) return;
+  const record = await loadEvidence(trigger.dataset.evidenceId);
+  if (!record) return showToast('Source context is unavailable');
+  const item = {
+    title: record.data.source_title || `${record.kind} evidence`,
+    source: record.data.source_title || 'Client source',
+    meta: `${record.kind} · ${record.evidence_id}`,
+    before: 'Retrieved from the production client source.',
+    quote: record.excerpt,
+    after: record.data.context || record.data.summary || '',
+    tags: [record.kind, record.scope, 'Live context'],
+  };
+  evidence[record.evidence_id] = item;
+  openDrawer(record.evidence_id, trigger);
+});
 function closeDrawer() {
   hideOverlay($('#evidenceDrawer'));
 }
