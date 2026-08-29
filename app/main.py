@@ -84,4 +84,9 @@ def product_script() -> FileResponse:
     return FileResponse(static_directory / "app.js")
 
 
+@app.get("/ghostbird-logo.png", include_in_schema=False)
+def product_logo() -> FileResponse:
+    return FileResponse(static_directory / "ghostbird-logo.png")
+
+
 app.include_router(ghostbird.router)
