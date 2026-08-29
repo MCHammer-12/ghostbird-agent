@@ -54,18 +54,35 @@ The initial architecture is API-first:
 
 ## Data model
 
-The initial model should include:
+All tables include `inserted_at` and `updated_at` timestamps.
 
-| Entity | Purpose |
-| --- | --- |
-| Organization | Security and billing boundary. |
-| Client | Hard scope for every source, retrieval, and generated result. |
-| Source | Uploaded transcript, note, LinkedIn post, or other original material. |
-| Segment | A retrievable excerpt with stable source location, speaker, and sequence metadata. |
-| Insight | Extracted anecdote, quote, metric, viewpoint, or voice cue linked to evidence. |
-| Embedding | Vector representation of a segment or insight, scoped to its client. |
-| Ingestion job | Status, retries, idempotency, and processing errors. |
-| Query audit | Privacy-safe trace of a request, scope, result IDs, latency, and model versions. |
+### clients
+
+- `id`
+- `name`
+- `summary` - includes goals
+- `writing_style` - markdown
+
+### uploads
+
+- `id`
+- `text`
+- `summary`
+- `created_at`
+- `client_id` - foreign key to `clients`
+
+### tags
+
+- `id`
+- `name` - e.g. transcripts, meeting notes
+- `client_id` - foreign key to `clients`
+
+### uploads__tags
+
+Join table for the many-to-many relationship between uploads and tags.
+
+- `upload_id` - foreign key to `uploads`
+- `tag_id` - foreign key to `tags`
 
 ## Security and grounding principles
 
