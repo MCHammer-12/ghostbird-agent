@@ -74,4 +74,14 @@ def product_ui() -> FileResponse:
     return FileResponse(static_directory / "index.html")
 
 
+@app.get("/styles.css", include_in_schema=False)
+def product_styles() -> FileResponse:
+    return FileResponse(static_directory / "styles.css")
+
+
+@app.get("/app.js", include_in_schema=False)
+def product_script() -> FileResponse:
+    return FileResponse(static_directory / "app.js")
+
+
 app.include_router(ghostbird.router)
