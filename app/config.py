@@ -11,6 +11,7 @@ class LLMProvider(StrEnum):
     OPENAI = "openai"
     ANTHROPIC = "anthropic"
     GOOGLE = "google"
+    COURIER = "courier"
 
 
 class RetrievalBackend(StrEnum):
@@ -90,6 +91,21 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o-mini"
     anthropic_model: str = "claude-3-5-haiku-latest"
     google_ai_model: str = "gemini-2.0-flash"
+
+    # Courier — self-hosted, OpenAI-compatible inference (docs/courier/api.txt).
+    # COURIER_BASE_URL is the platform root, e.g. https://uce.ngrok.app; the
+    # /v1/chat/completions path is appended by the client. One model id serves
+    # both anecdote generation and draft review.
+    courier_base_url: str = ""
+    courier_api_key: str = ""
+    courier_model: str = ""
+    # Courier runs on local Apple-silicon hardware, and a cold model load
+    # costs ~35s on top of generation, so the default 30s integration timeout
+    # is far too tight.
+    courier_timeout_seconds: float = 300.0
+    # Required, not an optimization: Inkling emits a reasoning span before its
+    # answer and will keep going to its 48k output ceiling if left unbounded.
+    courier_max_tokens: int = 2048
 
     # Supabase
     supabase_url: str = ""
@@ -197,7 +213,13 @@ class Settings(BaseSettings):
                 return bool(self.anthropic_api_key)
             case LLMProvider.GOOGLE:
                 return bool(self.google_ai_api_key)
+            case LLMProvider.COURIER:
+                return bool(self.courier_api_key and self.courier_base_url and self.courier_model)
         return False
+
+    def courier_endpoint(self, path: str) -> str:
+        """Absolute URL for a Courier OpenAI-compatible path."""
+        return f"{self.courier_base_url.rstrip('/')}/{path.lstrip('/')}"
 
     def required_for_action(self, action: str) -> list[str]:
         requirements: dict[str, list[tuple[str, bool]]] = {

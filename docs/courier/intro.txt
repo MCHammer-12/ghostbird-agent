@@ -1,0 +1,66 @@
+Introduction
+v1.0.0
+
+Courier transforms any M-series Mac into a production-ready AI API platform, providing enterprise-grade features that make self-hosting viable and cost-effective. Stop renting cloud APIs and start owning your AI infrastructure.
+
+Installation
+Courier runs entirely on your own M-series Mac. It comes in two forms that run the same local engine — pick whichever fits how you work:
+
+The Mac app (recommended) — the full desktop experience: Chat, Code, Studio, the model workbench, and the MCP Store, all in one place. The easiest way to get everything.
+The TUI — a lightweight terminal interface that runs the Courier platform (APIs, models, ngrok) headless. Great for servers and power users.
+You download both the same way: from the Overview or Billing page, choose the version you want and follow the prompts.
+
+Editions
+Personal — free, no license. Everything runs locally on your Mac.
+Commercial — $300/mo, activated with a one-time setup key (adds the unlocked seat-share and paid support).
+Commercial customers activate with a setup key. Need one? Reach out: jackson@thinkrecursion.ai
+
+Option A — The Mac app (recommended)
+One download gives you the whole product — Chat, Code, Studio, the model workbench, and more — with everything running on-device.
+
+Step 1: Download
+From the Overview or Billing page, select Courier for Mac and download the app.
+
+Step 2: Install
+Open the download, move Courier into your Applications folder, and launch it.
+
+Step 3: Launch & activate
+Open Courier. Personal runs immediately — everything is local. Commercial customers activate with their setup key. Sign in with your Courier account to connect Courier Cloud (optional).
+
+Step 4: Add a model and go
+Courier opens to your dashboard. Add a model from the Almanac, then start a Chat or open Code — it all runs locally on your Mac.
+
+Option B — The TUI
+Prefer the terminal, or running Courier headless on a server? The TUI runs the full Courier platform — APIs, models, ngrok — from the command line. This is the original Courier install flow, and it's still fully supported.
+
+Step 1: Install Courier
+Run this single command in your terminal to download and launch the Courier installer. This will most likely take 1-2 minutes to finish.
+
+curl -fsSL https://raw.githubusercontent.com/rosstoss/courier-dist/refs/heads/main/install.sh | bash
+Step 2: Initialize CourierDB
+Once the Terminal User Interface (TUI) opens, click INITIALIZE COURIERDB to set up your local database. CourierDB is fully local — no external services required.
+
+Step 3: Enter Setup Key
+Paste your one-time setup key in the field provided. This activates your Courier license.
+
+Step 4: Optional: ngrok Configuration
+If you want to expose your APIs publicly, you can configure ngrok during setup.
+
+Domain format: Enter your domain as myapp.ngrok.app, not https://myapp.ngrok.app. The installer expects the bare domain without the protocol prefix.
+
+Step 5: Finalize Installation
+Click FINALIZE INSTALLATION and Courier will set up everything automatically. There may be a 10-15 second wait as Courier finishes setup tasks in the background.
+
+Step 6: Admin Screen
+Once installation completes, you'll land on the admin screen. Here's what you can do:
+
+START / STOP: Start your API platform. Stop anytime.
+Status Display: Shows COURIER IS STOPPED / STARTED and ngrok status (NGROK READY or NGROK RUNNING AT your domain).
+QUIT UI: Exit the TUI. Running processes continue in the background.
+Self-Hosted Dashboard: Opens your local dashboard to test and add models immediately.
+Environment Configuration: Access COURIER ENV and COURIERDB ENV screens to edit environment variables, set up ngrok, or change your domain. NOTE: You may need to close and reopen the TUI if you change any environment variables.
+Step 7: Re-opening the TUI
+You can reopen the Courier TUI via the Terminal at any time by running:
+
+courier
+This reopens the admin TUI where you can start/stop your platform, check status, and manage configuration.

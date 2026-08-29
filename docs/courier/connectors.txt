@@ -1,0 +1,100 @@
+MCP Server
+Courier exposes a Model Context Protocol (MCP) server that lets agentic coding tools like Claude Code access your workbench models, library models, analytics, and documentation directly from your development environment.
+
+Setup
+Step 1: Create .mcp.json
+Create a .mcp.json file at the root of any project you want to use with Courier's MCP server.
+
+{
+  "mcpServers": {
+    "uce": {
+      "type": "sse",
+      "url": "<base_url>/mcp/sse",
+      "headers": {
+        "Authorization": "Bearer <api_key>"
+      }
+    }
+  }
+}
+Step 2: Add your credentials
+Replace <base_url> with your Courier instance URL and <api_key> with your API key from the dashboard.
+
+Step 3: Restart your agentic tool
+Restart your agentic tool (e.g. Claude Code) and it will auto-discover the MCP server from the .mcp.json file.
+
+What's Available
+Once connected, the MCP server gives your agentic tool access to:
+
+Workbench Models — query and interact with your active workbench models
+Library Models — browse available models in your library
+Analytics — retrieve usage and performance analytics
+Documentation — access Courier docs for context-aware assistance
+Compatibility
+The MCP server works with Claude Code and any other tool that supports the Model Context Protocol via SSE transport.
+
+n8n
+Courier integrates directly into n8n. You must be on a self-hosted n8n instance. If you need help setting one up go here: n8n Setup Guide.
+
+n8n Integration
+First, download the Courier LLM community package n8n-nodes-courier which includes:
+
+Courier Credentials
+Courier Nodes
+Compatibility with Courier-OSS
+Integration Steps
+Once the Community package is installed in your n8n instance navigate to credentials and create a new Credential.
+
+Select Courier API and enter your Base URL and API key (found in your dashboard).
+
+The credential will authenticate and return a status. If it is successful, you are ready to go!
+
+In your workflow search for the Courier nodes. Add the LLM node to your workflow and enter your credential. The node will automatically fetch models from your Workbench. Simply select the model you want to use and run the node!
+
+Message Formats
+The Courier LLM node supports two inputs: a plain message string or a full messages JSON object. There are four ways to format messages for multi-modal responses (Text, Vision, Audio, Image):
+
+Text Only Request
+[
+    {
+      "role": "system",
+      "content": "You are a helpful assistant"
+    },
+    {
+      "role": "user",
+      "content": "hello"
+    }
+]
+Vision + Text Requests
+[
+    {
+      "role": "system",
+      "content": "You are a helpful assistant"
+    },
+    {
+      "role": "user",
+      "content": {"text": "message", "image_bytes": ["base64 encoded images"]}
+    }
+]
+Audio + Text Requests
+[
+    {
+      "role": "system",
+      "content": "You are a helpful assistant"
+    },
+    {
+      "role": "user",
+      "content": {"text": "message", "audio": "base64 encoded audio file"}
+    }
+]
+Image Requests
+{
+    "role": "user",
+    "content": "Generate the city skyline",
+    "seed": 123,
+    "num_inference_steps": 16,
+    "height": 1024,
+    "width": 1024,
+    "guidance": 4,
+    "init_image": "Image",
+    "image_strength": 0.8
+}

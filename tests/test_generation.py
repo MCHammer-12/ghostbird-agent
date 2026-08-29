@@ -14,9 +14,11 @@ class FakeLLM:
     def __init__(self, payload: dict) -> None:
         self.payload = payload
         self.last_prompt: str | None = None
+        self.last_response_model: type | None = None
 
-    async def complete_json(self, system: str, prompt: str) -> dict:
+    async def complete_json(self, system: str, prompt: str, response_model=None) -> dict:
         self.last_prompt = prompt
+        self.last_response_model = response_model
         return self.payload
 
 

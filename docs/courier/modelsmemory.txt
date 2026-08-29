@@ -1,0 +1,45 @@
+Workbench
+To get started, add models from the library to your workbench. Models on your workbench are active APIs, and will show up in n8n.
+
+Utilize this interactive workbench to see how to add models from the library, view API details, and switch between Courier and OpenAI compatible API formats.
+
+See the interactive workbench demo on the documentation page.
+
+Production-Ready AI Infrastructure
+Optimized For Speed
+Our platform is optimized for maximum throughput on Apple Silicon, averaging 30-60 tokens/sec even with large, dense models like Devstral 2 123B 8bit.
+
+Flexible API Deployment
+Deploy models as 24/7 static APIs or on-demand flex APIs. Flex models auto-offload after 5 minutes of inactivity, optimizing memory usage while maintaining low latency.
+
+Automatic Hallucination Detection
+Our system detects when models hang or hallucinate and automatically restarts them. You only lose one request instead of an entire queue, ensuring maximum uptime.
+
+Intelligent Memory Management
+When new models need memory, our LRU policy automatically offloads least recently used flex models. This ensures optimal memory utilization without manual intervention.
+
+Industry-Leading Tool Calling
+Industry-leading tool calling for self-hosted AI stacks, with production-ready reliability for text-based models.
+
+Whisper API Support
+Production-ready OpenAI-compatible transcriptions and translations with flexible output formats and reliable behavior for automation workflows.
+
+High-Availability Round Robin
+Load multiple model instances to create a round-robin API. This provides automatic failover and batching on Apple's Unified Memory Architecture for better uptime and reliability.
+
+Comprehensive Analytics
+Track usage, tokens, response times, and more from your analytics dashboard. Calculate savings, analyze usage patterns, and monitor uptime.
+
+n8n Integration
+Connect Courier directly to your n8n workflows with custom community nodes. Native credential and node support with auto-synced model library.
+
+Advanced Fine-Tuning
+Native support for Low-Rank Adaptation (LoRA) adapters on top of base models for specialized tasks and fine-tuning.
+
+Structured JSON Responses
+Guaranteed structured JSON outputs using the Outlines library for reliable, schema-compliant responses with FSM-based logit masking.
+
+Platform Overview
+Courier provides a complete AI infrastructure solution that runs locally on M-series Mac hardware, leveraging Apple's Unified Memory Architecture. Our software is optimized for this memory architecture and handles all the complexity of running open-source AI models. Simply purchase a Mac and our software license and you are production ready.
+
+We chose Apple's Unified Memory Architecture because of how affordable and performant it is compared to traditional NVIDIA GPUs. Courier combines the power of open-weight models from companies like Mistral and Qwen with enterprise-grade features like automatic failover, hallucination detection, and structured output generation.

@@ -19,10 +19,15 @@ API_KEYS = [
 
 @pytest.fixture
 def client(monkeypatch) -> TestClient:
+    # Pinned so the suite does not inherit a developer's .env: the isolation
+    # tests assume an empty mock, and the LLM provider must be one no test
+    # actually calls out to.
     monkeypatch.setenv("API_KEYS", json.dumps(API_KEYS))
     monkeypatch.setenv("RETRIEVAL_BACKEND", "mock")
+    monkeypatch.setenv("LLM_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
     monkeypatch.setenv("MOCK_INGESTION_DELAY_POLLS", "0")
+    monkeypatch.setenv("MOCK_LOAD_FIXTURES", "false")
 
     from app.config import get_settings
     from app.dependencies.services import _build_retrieval_service

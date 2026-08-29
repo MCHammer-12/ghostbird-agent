@@ -37,7 +37,11 @@ async def find_anecdotes(
     if not evidence_is_sufficient(cards, settings):
         return _insufficient()
 
-    data = await llm.complete_json(ANECDOTE_SYSTEM, anecdote_prompt(theme, cards))
+    data = await llm.complete_json(
+        ANECDOTE_SYSTEM,
+        anecdote_prompt(theme, cards),
+        AnecdoteSearchResponse,
+    )
     allowed = allowed_evidence_ids(cards)
 
     anecdotes: list[Anecdote] = []

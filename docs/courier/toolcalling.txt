@@ -1,0 +1,148 @@
+Tool Calling API
+Industry-leading tool calling for self-hosted AI stacks, with production-ready reliability for text-based models. One of the most robust OpenAI-compatible tool-calling implementations available on an API platform you can own.
+
+Global OpenAI Compatibility
+Auth header: Authorization: Bearer <api_key> is required.
+Model matching is case-insensitive against workbench name or nickname, and only models available to the API key are usable.
+Error Envelope
+{
+  "error": {
+    "message": "....",
+    "type": "invalid_request_error",
+    "code": "...."
+  }
+}
+POST /v1/chat/completions
+Supported Request Fields
+model, messages, tools, tool_choice, stream, response_format, stop, max_tokens, temperature, top_p, presence_penalty, frequency_penalty, user. n is accepted but currently returns one choice (index: 0).
+
+Request Body Example
+{
+  "model": "Solar Open 100B",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "What is the weather in Denver?"}
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get current weather by city",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {"type": "string"}
+          },
+          "required": ["city"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto",
+  "stream": false
+}
+Tool Support Rules
+Only tools with type: "function" are used.
+Forced tool_choice names must exist in tools, or requests fail with 400 invalid_tool_choice.
+Text models support tool-calling pipeline; some vision/audio combinations do not support tools or streaming.
+Tool arguments are normalized to JSON strings; strict invalid arguments fail with 400 invalid_tool_call.
+Response Body Example
+{
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_abc123",
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Denver\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ]
+}
+Streaming Behavior (SSE)
+Emits chat.completion.chunk events.
+Streams content via choices[0].delta.content.
+Tool calls stream incrementally through delta.tool_calls argument chunks.
+Final chunk sets finish_reason to tool_calls or stop, then emits [DONE].
+POST /v1/responses
+Supported Request Fields
+model, input, messages, input_content, instructions, text, tools, tool_choice, stream, stop, max_tokens, max_output_tokens, temperature, top_p, presence_penalty, frequency_penalty, user. n, logit_bias, and input_type are accepted but not used in generation logic.
+
+Request Body Example
+{
+  "model": "Solar Open 100B",
+  "input": [
+    {"type": "message", "role": "user", "content": "Find today's top headline"}
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_news",
+        "description": "Search current headlines",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {"type": "string"}
+          },
+          "required": ["query"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto",
+  "stream": false
+}
+Input Normalization
+input can be a string or a list of typed items.
+Supported item types: message, input_text, function_call, function_call_output.
+reasoning input items are rejected with 400 invalid_input.
+Response Body Example
+{
+  "object": "response",
+  "output": [
+    {
+      "id": "msg_123",
+      "type": "message",
+      "status": "completed",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Searching now...",
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "id": "fc_123",
+      "type": "function_call",
+      "status": "completed",
+      "call_id": "call_abc123",
+      "name": "search_news",
+      "arguments": "{\"query\":\"top headline today\"}"
+    }
+  ]
+}
+Streaming Behavior (Responses SSE Events)
+response.created, response.in_progress, response.output_item.added, response.content_part.added, response.output_text.delta, response.output_text.done, response.content_part.done, response.function_call_arguments.delta, response.function_call_arguments.done, response.output_item.done, response.completed, error
+
+Streams end with data: [DONE].
+
+Multimodal Restrictions on /v1/responses
+For image-text-text and audio-* models, stream and tools are not supported.
+When provided for those models, text.format must be plain text.
+Tool Calling Parity Notes
+OpenAI-style behavior with function tools only.
+Tool arguments must normalize to valid JSON strings.
+Some multimodal combinations intentionally do not support tools and/or streaming.

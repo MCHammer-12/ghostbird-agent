@@ -37,7 +37,9 @@ async def review_draft(
         return DraftReviewResponse()
 
     data = await llm.complete_json(
-        DRAFT_REVIEW_SYSTEM, draft_review_prompt(draft_text, cards)
+        DRAFT_REVIEW_SYSTEM,
+        draft_review_prompt(draft_text, cards),
+        DraftReviewResponse,
     )
     allowed = allowed_evidence_ids(cards)
 
