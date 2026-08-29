@@ -41,7 +41,7 @@ PROMPT_VERSIONS = {
     "anecdote": "anecdote-v1",
     "voice_profile": "voice-profile-v1",
     "enrich_post": "enrich-post-v1",
-    "ideate_post": "ideate-post-v1",
+    "ideate_post": "ideate-post-v2",
     "draft_post": "draft-post-v1",
     "verify_output": "verify-output-v1",
 }
@@ -123,6 +123,11 @@ class GhostbirdService:
                 "evidence": [record.model_dump(mode="json") for record in evidence],
             },
         )
+        if len(result.ideas) != request.count:
+            raise IntegrationError(
+                "ghostbird",
+                f"Ideation returned {len(result.ideas)} ideas; expected {request.count}",
+            )
         allowed = {record.evidence_id for record in evidence}
         for idea in result.ideas:
             self._verify_references(idea, allowed)

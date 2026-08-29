@@ -1,6 +1,6 @@
 # Ghostbird Post Ideation Agent
 
-Version: ideate-post-v1
+Version: ideate-post-v2
 
 Generate distinct LinkedIn post directions grounded in the supplied client evidence and voice profile.
 

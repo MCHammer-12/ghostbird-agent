@@ -48,6 +48,43 @@ const evidence = {
     tags: ["Client feedback", "Exact details", "Voice cue"],
     kind: "email",
   },
+  succession: {
+    title: "Can you put your dad on the phone?",
+    source: "Vance & Kinder × Ghostbird Content Interview",
+    meta: "Jul 9, 2026 · Marisol Vance · 04:13–05:48",
+    before: "A Big Sky Fabrication customer who had worked with Marisol’s father since 1994 called without knowing she had taken over.",
+    quote: "“And I said, this is Marisol, I run the company now, how can I help? And he just goes quiet for a second and then says well, can you put your dad on the phone.”",
+    after: "Marisol handled the order. The customer later became a top-twenty account and referred two other fabrication shops.",
+    tags: ["Client story", "Family business", "Leadership"],
+  },
+  colton: {
+    title: "Colton’s first $4,000 close",
+    source: "Vance & Kinder × Ghostbird Content Interview",
+    meta: "Jul 9, 2026 · Marisol Vance · 06:01–06:51",
+    before: "Colton was new to sales and still learning the product line.",
+    quote: "“I still remember my first sale after I took over, and it was smaller than his. Everybody starts small.”",
+    after: "Marisol saw the moment as a reminder that owners need to say this out loud to new people.",
+    tags: ["Client story", "Mentoring", "$4,000 sale"],
+  },
+  pricing: {
+    title: "The transparent 8% price increase",
+    source: "Vance & Kinder × Ghostbird Content Interview",
+    meta: "Aug 20, 2026 · Marisol Vance · 02:54–03:45",
+    before: "Steel tariffs forced Vance & Kinder to raise prices by eight percent.",
+    quote: "“I sent a short letter explaining exactly why, showed the actual cost increase we were absorbing, and didn’t try to hide behind vague language like market conditions.”",
+    after: "One small account left, while larger customers thanked the company for being upfront.",
+    tags: ["Client story", "8% price increase", "Transparency"],
+  },
+  marathon: {
+    title: "Hold the half-marathon post",
+    source: "Re: Drafts from July content call",
+    meta: "Jul 11, 2026 · Marisol Vance · Client feedback email",
+    before: "Marisol had discussed turning her half-marathon into a personal post.",
+    quote: "“Let’s hold the marathon post like we talked about, I still don’t have a finish line photo yet.”",
+    after: "The agency held the idea until the real visual was available.",
+    tags: ["Client feedback", "Visual asset", "Editorial timing"],
+    kind: "email",
+  },
 };
 
 const clients = {
@@ -57,7 +94,7 @@ const clients = {
     company: "Vance & Kinder",
     initials: "MV",
     pronoun: "her.",
-    sourceCount: 8,
+    sourceCount: 4,
     voice: `# Marisol Vance — voice profile
 
 ## The feeling

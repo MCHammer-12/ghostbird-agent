@@ -95,11 +95,12 @@ class ValidWritingModel(RecordedMarisolModel):
                 }
             )
         if prompt_name == "ideate_post":
+            count = payload["request"]["count"]
             return output_model.model_validate(
                 {
                     "ideas": [
                         {
-                            "title": "Reliability is the strategy",
+                            "title": f"Reliability is the strategy {index + 1}",
                             "angle": "Use an operational story to show how trust compounds.",
                             "goal": "trust",
                             "hook": "The sale started a year before the buyer called.",
@@ -107,6 +108,7 @@ class ValidWritingModel(RecordedMarisolModel):
                                 {"evidence_id": evidence_id, "reason": "Client evidence"}
                             ],
                         }
+                        for index in range(count)
                     ]
                 }
             )
