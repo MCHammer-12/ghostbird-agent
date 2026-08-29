@@ -46,6 +46,8 @@ Present each pair side by side. Visually highlight:
 - Source references
 - Stronger and more varied post angles
 
+In each Ghostbird screenshot, expand one context breadcrumb so the audience can see the exact excerpt, speaker, source, and surrounding context without adding a fifth screenshot.
+
 Do not claim that the comparison proves one model is better. The demonstration proves the value of structured client context, retrieval, and voice guidance.
 
 ## Success signal

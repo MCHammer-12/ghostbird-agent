@@ -37,3 +37,17 @@ Source: [Ryan Cook on evaluating ghostwriters](https://www.linkedin.com/posts/ry
 - Support image and asset recommendations tied to a specific story or post idea.
 - Preserve client edits and approvals because Ghostbird already treats iteration as part of learning voice and strategy.
 - Evaluate the synthetic dataset on the same transcript-to-post skills Ghostbird publicly uses when hiring writers.
+
+## Ryan Cook method analysis
+
+Ryan describes LinkedIn as a long-term relationship and authority engine. His public guidance emphasizes staying top of mind, interacting with other people, iterating frequently, and publishing posts that each have genuine home-run potential rather than posting low-effort filler.
+
+He expects an AI-heavy market to increase the value of writing that feels handmade. His authenticity signals are specific and personal: unusual details, informal punctuation, all-caps emphasis, everyday events, and other small choices a general model would not know to generate. The useful lesson is not to imitate Ryan's individual quirks; it is to retrieve and preserve the equivalent quirks for each client.
+
+Ryan also describes specialization as a competitive advantage. For outputs, this means industry research and client expertise are part of writing quality rather than optional enrichment.
+
+His commercial model treats trust as cumulative. Ghostbird's ideal clients sell high-value B2B offerings that require repeated exposure, and he describes meaningful lead growth as a six-to-twelve-month outcome rather than an immediate result.
+
+Sources: [Building Authority Through Writing, part 1](https://www.boostability.com/resources/podcast/building-authority-through-writing-a-look-at-ghostbird-with-ryan-cook-part-1/) and [part 2](https://www.boostability.com/resources/podcast/building-authority-through-writing-a-look-at-ghostbird-with-ryan-cook-part-2/).
+
+The resulting prompt principles are maintained in [OUTPUT_PROMPT_PRINCIPLES.md](OUTPUT_PROMPT_PRINCIPLES.md).
