@@ -20,6 +20,11 @@ all = [
     "supabase>=2.11.0",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
 [project.scripts]
 dev = "app.dev:main"
 

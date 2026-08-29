@@ -11,7 +11,6 @@ from app.integrations.email import EmailClient
 from app.integrations.google_ import GoogleClient
 from app.integrations.llm import LLMClient
 from app.integrations.stripe_ import StripeClient
-from app.integrations.supabase_ import SupabaseClient
 from app.schemas.automations import (
     ApifyRunRequest,
     ApifyRunResponse,
@@ -25,11 +24,15 @@ from app.schemas.automations import (
     LLMCompleteResponse,
     StripeCustomerRequest,
     StripeCustomerResponse,
-    SupabaseQueryRequest,
-    SupabaseQueryResponse,
 )
 
 router = APIRouter(prefix="/automations", tags=["automations"])
+
+# POST /automations/supabase/query was removed on purpose. Ghostbird clients
+# reach client data only through the Track 2 REST API, which calls Track 1's
+# RetrievalService (app/services/retrieval.py). No caller outside Track 1 may
+# query Supabase directly -- a generic table/select passthrough would bypass
+# every client-isolation check Track 2 makes (docs/TRACKS.md, Rules 1 and 2).
 
 
 def _require(action: str) -> None:
@@ -97,25 +100,6 @@ async def google_sheets_append(
     except IntegrationError as exc:
         raise _handle_integration_error(exc) from exc
     return {"success": True, **result}
-
-
-@router.post("/supabase/query", response_model=SupabaseQueryResponse)
-async def supabase_query(
-    body: SupabaseQueryRequest,
-    _: None = Depends(verify_api_key),
-) -> dict[str, Any]:
-    _require("supabase_query")
-    client = SupabaseClient(get_settings())
-    try:
-        if body.operation == "insert":
-            if not body.row:
-                raise HTTPException(status_code=400, detail="row is required for insert")
-            data = await client.insert(body.table, body.row)
-        else:
-            data = await client.query(body.table, body.select, body.limit)
-    except IntegrationError as exc:
-        raise _handle_integration_error(exc) from exc
-    return {"success": True, "data": data}
 
 
 @router.post("/crm/hubspot/contact", response_model=HubSpotContactResponse)

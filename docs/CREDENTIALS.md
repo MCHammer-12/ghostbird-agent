@@ -79,7 +79,9 @@ fastapi cloud env set SUPABASE_URL "https://xxx.supabase.co"
 fastapi cloud env set --secret SUPABASE_SERVICE_ROLE_KEY "eyJ..."
 ```
 
-Endpoint: `POST /automations/supabase/query`
+Endpoint: none. The generic `POST /automations/supabase/query` passthrough was
+removed — Supabase is reached only by Track 1's retrieval service
+(`app/services/retrieval.py`), never by an API caller (docs/TRACKS.md, Rules 1 and 2).
 
 ---
 

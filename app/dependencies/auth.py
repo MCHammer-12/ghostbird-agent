@@ -45,3 +45,29 @@ async def verify_stripe_webhook(
         raise HTTPException(status_code=400, detail="Invalid Stripe webhook signature") from exc
 
     return payload
+
+
+def require_client_access(
+    client_id: str,
+    settings: Settings = Depends(get_settings),
+    x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+) -> str:
+    """Authenticate the caller, then authorize the requested client.
+
+    This runs before any retrieval call, in code, never in a prompt
+    (docs/TRACKS.md, Track 2 Security Rule). Returns the client_id so routers
+    depend on the *authorized* value rather than the raw path parameter.
+    """
+    if not settings.api_keys and not settings.api_key:
+        raise HTTPException(status_code=503, detail="API_KEY or API_KEYS not configured")
+
+    allowed = settings.client_ids_for_key(x_api_key or "")
+    if allowed is None:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+
+    # An empty allow-list means every client (the single-API_KEY dev fallback).
+    if allowed and client_id not in allowed:
+        raise HTTPException(
+            status_code=403, detail="API key is not authorized for this client"
+        )
+    return client_id

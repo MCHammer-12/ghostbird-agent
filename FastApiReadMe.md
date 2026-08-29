@@ -40,7 +40,6 @@ Your app is live at `https://{app}.fastapicloud.dev`. Open `/docs` for interacti
 | POST | `/automations/email/send` | `X-API-Key` | Send email (Resend/SendGrid) |
 | POST | `/automations/apify/run` | `X-API-Key` | Run Apify actor |
 | POST | `/automations/google/sheets/append` | `X-API-Key` | Append Google Sheet row |
-| POST | `/automations/supabase/query` | `X-API-Key` | Supabase select/insert |
 | POST | `/automations/crm/hubspot/contact` | `X-API-Key` | Create HubSpot contact |
 | POST | `/automations/stripe/customer` | `X-API-Key` | Create Stripe customer |
 | POST | `/webhooks/stripe` | Stripe signature | Inbound Stripe events |
