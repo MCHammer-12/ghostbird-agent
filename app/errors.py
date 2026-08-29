@@ -1,9 +1,4 @@
-"""Safe error responses.
-
-Upstream provider errors routinely echo the request back. Since our requests
-carry client source text, provider messages never reach the client or the logs
-verbatim: they are reduced to a service name and a status code.
-"""
+"""Safe error responses."""
 
 from __future__ import annotations
 
@@ -14,7 +9,6 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from app.integrations.base import IntegrationError
-from app.isolation import ClientScopeViolation
 from app.observability import current_request_id
 
 logger = logging.getLogger(__name__)
@@ -45,21 +39,12 @@ def register_error_handlers(app: FastAPI) -> None:
             content=_payload("invalid_request", f"Invalid fields: {', '.join(fields)}"),
         )
 
-    @app.exception_handler(ClientScopeViolation)
-    async def _scope_error(_: Request, exc: ClientScopeViolation) -> JSONResponse:
-        logger.critical("client scope violation surfaced to API layer")
-        return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            content=_payload("client_scope_violation", "Request failed"),
-        )
-
     @app.exception_handler(IntegrationError)
     async def _integration_error(_: Request, exc: IntegrationError) -> JSONResponse:
         logger.error(
             "upstream failure service=%s status=%s", exc.service, exc.status_code
         )
         if exc.status_code == status.HTTP_503_SERVICE_UNAVAILABLE:
-            # Our own configuration gap, not an upstream fault: say so plainly.
             return JSONResponse(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 content=_payload("not_configured", f"{exc.service}: {exc.message}"),
@@ -67,13 +52,6 @@ def register_error_handlers(app: FastAPI) -> None:
         return JSONResponse(
             status_code=status.HTTP_502_BAD_GATEWAY,
             content=_payload("upstream_error", f"Upstream service {exc.service} failed"),
-        )
-
-    @app.exception_handler(NotImplementedError)
-    async def _not_implemented(_: Request, exc: NotImplementedError) -> JSONResponse:
-        return JSONResponse(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            content=_payload("not_implemented", str(exc)),
         )
 
     @app.exception_handler(Exception)

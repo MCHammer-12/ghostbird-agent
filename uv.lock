@@ -348,6 +348,7 @@ dependencies = [
     { name = "fastapi", extra = ["standard"] },
     { name = "httpx" },
     { name = "pydantic-settings" },
+    { name = "supabase" },
 ]
 
 [package.optional-dependencies]
@@ -384,6 +385,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.7.0" },
     { name = "stripe", marker = "extra == 'all'", specifier = ">=11.4.0" },
     { name = "stripe", marker = "extra == 'stripe'", specifier = ">=11.4.0" },
+    { name = "supabase", specifier = ">=2.11.0" },
     { name = "supabase", marker = "extra == 'all'", specifier = ">=2.11.0" },
     { name = "supabase", marker = "extra == 'supabase'", specifier = ">=2.11.0" },
 ]

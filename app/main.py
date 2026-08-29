@@ -8,17 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from app.config import get_settings
 from app.errors import register_error_handlers
 from app.observability import RequestContextMiddleware, configure_logging
-from app.routers import (
-    anecdotes,
-    automations,
-    drafts,
-    evidence,
-    ghostbird,
-    health,
-    search,
-    sources,
-    webhooks,
-)
+from app.routers import clients, ghostbird, health, tags, uploads
 
 settings = get_settings()
 static_directory = Path(__file__).parent / "static"
@@ -27,16 +17,13 @@ configure_logging(settings.environment)
 
 app = FastAPI(
     title=settings.app_name,
-    version="0.1.0",
+    version="0.2.0",
     description=(
-        "Ghostbird Track 2: the API Track 3 consumes. Client evidence is reached "
-        "only through the Track 1 retrieval contract, never by querying a "
-        "database directly."
+        "Ghostbird CRUD API for clients, uploads, and tags, plus the ghostbird "
+        "agent endpoints for voice profile and post generation."
     ),
 )
 
-# Request IDs and privacy-safe access logging, outermost so every response
-# carries X-Request-ID.
 app.add_middleware(RequestContextMiddleware)
 
 if settings.cors_origins:
@@ -48,22 +35,12 @@ if settings.cors_origins:
         allow_headers=["*"],
     )
 
-# Safe error envelopes: upstream messages never reach the caller verbatim.
 register_error_handlers(app)
 
-# Health / probes.
 app.include_router(health.router)
-
-# Ghostbird Track 2 API (/v1/clients/{client_id}/...).
-app.include_router(sources.router)
-app.include_router(search.router)
-app.include_router(evidence.router)
-app.include_router(anecdotes.router)
-app.include_router(drafts.router)
-
-# Template automation endpoints, unchanged.
-app.include_router(automations.router)
-app.include_router(webhooks.router)
+app.include_router(clients.router)
+app.include_router(uploads.router)
+app.include_router(tags.router)
 
 app.mount("/static", StaticFiles(directory=static_directory), name="static")
 

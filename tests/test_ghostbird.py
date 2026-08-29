@@ -300,9 +300,10 @@ class GhostbirdApiContractTests(unittest.TestCase):
     def test_openapi_exposes_v1_workflows(self) -> None:
         paths = app.openapi()["paths"]
         expected = {
-            "/v1/clients/{client_id}/sources",
-            "/v1/clients/{client_id}/search",
-            "/v1/clients/{client_id}/evidence/{evidence_id}",
+            "/v1/clients",
+            "/v1/clients/{client_id}",
+            "/v1/clients/{client_id}/uploads",
+            "/v1/clients/{client_id}/tags",
             "/v1/clients/{client_id}/voice-profile",
             "/v1/clients/{client_id}/posts:enrich",
             "/v1/clients/{client_id}/posts:ideate",

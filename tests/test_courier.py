@@ -19,7 +19,7 @@ from app.integrations.llm import (
     _strip_courier_markers,
     json_schema_for,
 )
-from app.schemas.evidence import AnecdoteSearchResponse, DraftReviewResponse
+from app.schemas.llm_responses import AnecdoteSearchResponse, DraftReviewResponse
 
 
 def courier_settings(**overrides) -> Settings:

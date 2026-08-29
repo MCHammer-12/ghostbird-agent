@@ -1,6 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
-from app.config import get_settings
+from app.config import Settings, get_settings
+from app.dependencies.db import get_repository
+from app.db.protocol import Repository
 
 router = APIRouter(tags=["health"])
 
@@ -23,16 +25,19 @@ def integration_status() -> dict[str, list[str] | str]:
 
 @router.get("/healthz")
 def liveness() -> dict[str, str]:
-    """The application is running."""
     return {"status": "ok"}
 
 
 @router.get("/readyz")
-def readiness() -> dict[str, str]:
-    """Required dependencies are available."""
-    settings = get_settings()
+async def readiness(
+    settings: Settings = Depends(get_settings),
+    repo: Repository = Depends(get_repository),
+) -> dict[str, str | bool]:
+    database = "supabase" if settings.supabase_configured() else "memory"
+    ready = await repo.ping()
     return {
-        "status": "ready",
+        "status": "ready" if ready else "degraded",
         "environment": settings.environment,
-        "retrieval_backend": settings.retrieval_backend.value,
+        "database": database,
+        "database_ready": ready,
     }
