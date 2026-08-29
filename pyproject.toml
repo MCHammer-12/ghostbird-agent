@@ -1,0 +1,34 @@
+[project]
+name = "fastapi-cloud-base-template"
+version = "0.1.0"
+description = "Clone-and-deploy FastAPI automation boilerplate for FastAPI Cloud"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+    "httpx>=0.28.0",
+    "pydantic-settings>=2.7.0",
+]
+
+[project.optional-dependencies]
+google = ["google-auth>=2.37.0", "google-api-python-client>=2.159.0"]
+stripe = ["stripe>=11.4.0"]
+supabase = ["supabase>=2.11.0"]
+all = [
+    "google-auth>=2.37.0",
+    "google-api-python-client>=2.159.0",
+    "stripe>=11.4.0",
+    "supabase>=2.11.0",
+]
+
+[project.scripts]
+dev = "app.dev:main"
+
+[tool.fastapi]
+entrypoint = "app.main:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

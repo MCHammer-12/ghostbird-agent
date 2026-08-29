@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.fastapicloud/
+.python-version.local
+.DS_Store
+.idea/
+.vscode/

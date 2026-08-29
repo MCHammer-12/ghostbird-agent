@@ -1,0 +1,5 @@
+tests/
+docs/
+deploy/
+*.md
+!README.md
