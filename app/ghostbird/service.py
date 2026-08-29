@@ -40,10 +40,10 @@ PROMPT_VERSIONS = {
     "quote": "quote-v1",
     "anecdote": "anecdote-v1",
     "voice_profile": "voice-profile-v1",
-    "enrich_post": "enrich-post-v1",
-    "ideate_post": "ideate-post-v3",
-    "draft_post": "draft-post-v1",
-    "verify_output": "verify-output-v1",
+    "enrich_post": "enrich-post-v2",
+    "ideate_post": "ideate-post-v4",
+    "draft_post": "draft-post-v2",
+    "verify_output": "verify-output-v2",
 }
 
 
