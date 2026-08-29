@@ -115,8 +115,14 @@ document.addEventListener("click", (event) => {
 });
 
 let activeClient = "vance_kinder";
+let outputsVisible = false;
 function isPreparedClient() {
   return activeClient === "vance_kinder";
+}
+function syncWorkspaceOutputs() {
+  const visible = isPreparedClient() && outputsVisible;
+  $("#resultsSection").hidden = !visible;
+  $(".draft-section").hidden = !visible;
 }
 function selectClient(clientId) {
   if (!clients[clientId]) return;
@@ -134,10 +140,15 @@ function selectClient(clientId) {
   $("#sourceNavCount").textContent = String(client.sourceCount);
   $(".markdown-editor textarea").value = voiceProfiles[clientId] || client.voice;
   $$(".client-option").forEach((option) => option.classList.toggle("active", option.dataset.client === clientId));
-  $$("[data-marisol-context]").forEach((section) => { section.hidden = !isPreparedClient(); });
+  $$("[data-marisol-context]").forEach((section) => {
+    if (section.id !== "resultsSection" && !section.classList.contains("draft-section")) {
+      section.hidden = !isPreparedClient();
+    }
+  });
   $("#emptyWorkspaceContext").hidden = isPreparedClient();
   $("#emptySourceContext").hidden = isPreparedClient();
   $("#writingPrompt").value = draftsByClient[clientId][activeMode];
+  syncWorkspaceOutputs();
   clientMenu.hidden = true;
   clientButton.setAttribute("aria-expanded", "false");
 }
@@ -152,16 +163,18 @@ $$('.nav-item').forEach((button) => button.addEventListener('click', () => {
 
 const modes = {
   enrich: {
-    eyebrow: 'Bring a rough thought',
-    title: 'What are you working on?',
+    eyebrow: 'Start with a draft',
+    title: 'Paste in what you have.',
     prompt: 'The best customer relationships aren’t built when everything goes right.\n\nThey’re built in the moments when you have to tell someone something they don’t want to hear.',
-    label: 'Find what fits',
+    hint: 'Ghostbird will surface proof and voice cues that fit this draft.',
+    label: 'Enrich this post',
   },
   create: {
-    eyebrow: 'Start with a direction',
+    eyebrow: 'Start with an idea',
     title: 'What should this post explore?',
     prompt: 'An honest post about leading through an operational change — for owners who feel pressure to make every transition look seamless.',
-    label: 'Explore directions',
+    hint: 'Ghostbird will find an angle, then help turn it into a first draft.',
+    label: 'Create a draft',
   },
 };
 let activeMode = 'enrich';
@@ -174,42 +187,31 @@ const draftsByClient = Object.fromEntries(Object.keys(clients).map((clientId) =>
 ]));
 const voiceProfiles = Object.fromEntries(Object.entries(clients).map(([clientId, client]) => [clientId, client.voice]));
 
-function selectMode(nextMode, moveFocus = false) {
+function selectMode(nextMode) {
   draftsByClient[activeClient][activeMode] = $('#writingPrompt').value;
   activeMode = nextMode;
+  outputsVisible = false;
   const mode = modes[nextMode];
   const button = $(`.mode[data-mode="${nextMode}"]`);
   $$('.mode').forEach((item) => {
     const active = item === button;
     item.classList.toggle('active', active);
-    item.setAttribute('aria-selected', String(active));
-    item.tabIndex = active ? 0 : -1;
+    item.setAttribute('aria-pressed', String(active));
   });
-  $('#writingPanel').setAttribute('aria-labelledby', button.id);
   $('#composerEyebrow').textContent = mode.eyebrow;
   $('#composerTitle').textContent = mode.title;
   $('#writingPrompt').value = draftsByClient[activeClient][nextMode];
+  $('#composerHint').textContent = mode.hint;
   $('#generateLabel').textContent = mode.label;
-  if (moveFocus) button.focus();
+  syncWorkspaceOutputs();
 }
 $$('.mode').forEach((button) => button.addEventListener('click', () => selectMode(button.dataset.mode)));
-$('.mode-switch').addEventListener('keydown', (event) => {
-  const modesInOrder = $$('.mode');
-  const currentIndex = modesInOrder.findIndex((button) => button.dataset.mode === activeMode);
-  let nextIndex = currentIndex;
-  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % modesInOrder.length;
-  if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + modesInOrder.length) % modesInOrder.length;
-  if (event.key === 'Home') nextIndex = 0;
-  if (event.key === 'End') nextIndex = modesInOrder.length - 1;
-  if (nextIndex !== currentIndex) {
-    event.preventDefault();
-    selectMode(modesInOrder[nextIndex].dataset.mode, true);
-  }
-});
 
 $('#generateButton').addEventListener('click', () => {
+  outputsVisible = true;
+  syncWorkspaceOutputs();
   $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  showToast('Grounded material is ready below');
+  showToast(activeMode === 'enrich' ? 'Your post is ready to enrich' : 'Your first draft is ready to shape');
 });
 
 let returnFocus;

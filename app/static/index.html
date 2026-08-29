@@ -51,37 +51,33 @@
             <button class="outline-button" id="openUpload"><span>＋</span> Add source</button>
           </header>
 
-          <div class="mode-switch" role="tablist" aria-label="Writing mode">
-            <button class="mode active" id="enrichTab" data-mode="enrich" role="tab" aria-selected="true" aria-controls="writingPanel" tabindex="0"><span>↗</span> Enrich post</button>
-            <button class="mode" id="createTab" data-mode="create" role="tab" aria-selected="false" aria-controls="writingPanel" tabindex="-1"><span>✦</span> Create new post</button>
-          </div>
+          <section class="use-case-grid" aria-label="Choose a writing task">
+            <button class="mode use-case active" id="enrichTab" data-mode="enrich" aria-pressed="true">
+              <span class="use-case-number">01</span><span class="use-case-icon">↗</span>
+              <span class="use-case-copy"><span class="eyebrow">Start with a draft</span><strong>Enrich a post</strong><small>Make a rough thought feel specific and unmistakably hers.</small></span>
+              <span class="use-case-points"><span>Real metrics, stories &amp; quotes</span><span>Voice cues that keep it on-brand</span></span>
+            </button>
+            <button class="mode use-case" id="createTab" data-mode="create" aria-pressed="false">
+              <span class="use-case-number">02</span><span class="use-case-icon">✦</span>
+              <span class="use-case-copy"><span class="eyebrow">Start with an idea</span><strong>Create a new post</strong><small>Turn a topic into a grounded direction worth writing.</small></span>
+              <span class="use-case-points"><span>Find an angle from client context</span><span>Build a solid first draft to shape</span></span>
+            </button>
+          </section>
 
-          <div id="writingPanel" role="tabpanel" aria-labelledby="enrichTab">
-          <div class="workspace-grid">
-            <section class="composer-card">
-              <div class="composer-topline">
-                <div><p class="eyebrow" id="composerEyebrow">Bring a rough thought</p><h2 id="composerTitle">What are you working on?</h2></div>
-                <button class="more-button" aria-label="More options">•••</button>
-              </div>
-              <textarea id="writingPrompt" aria-label="Writing prompt">The best customer relationships aren’t built when everything goes right.
+          <section id="writingPanel" class="composer-card simple-composer" aria-live="polite">
+            <div class="composer-topline">
+              <div><p class="eyebrow" id="composerEyebrow">Start with a draft</p><h2 id="composerTitle">Paste in what you have.</h2></div>
+            </div>
+            <textarea id="writingPrompt" aria-label="Writing prompt">The best customer relationships aren’t built when everything goes right.
 
 They’re built in the moments when you have to tell someone something they don’t want to hear.</textarea>
-              <div class="composer-footer">
-                <button class="ghost-button">⌘ <span>Ask a question</span></button>
-                <button class="generate-button" id="generateButton"><span id="generateLabel">Find what fits</span><b>↗</b></button>
-              </div>
-            </section>
+            <div class="composer-footer">
+              <p class="composer-hint" id="composerHint">Ghostbird will surface proof and voice cues that fit this draft.</p>
+              <button class="generate-button" id="generateButton"><span id="generateLabel">Enrich this post</span><b>↗</b></button>
+            </div>
+          </section>
 
-            <aside class="guidance-card">
-              <div class="card-title"><span class="sun-icon">✳</span><div><p class="eyebrow">Grounding</p><h3>Use what’s true</h3></div></div>
-              <p>Ghostbird will find source-backed details and keep editorial suggestions separate.</p>
-              <div class="guidance-row"><span class="metric-icon">#</span><div><b>3 relevant details found</b><small>Metrics, anecdotes &amp; voice cues</small></div></div>
-              <div class="guidance-row"><span class="metric-icon">✓</span><div><b>Every claim gets a source</b><small>Open any breadcrumb to verify it</small></div></div>
-            </aside>
-          </div>
-          </div>
-
-          <section class="results-section" id="resultsSection" data-marisol-context>
+          <section class="results-section" id="resultsSection" data-marisol-context hidden>
             <div class="section-heading"><div><p class="eyebrow">Grounded material</p><h2>Useful pieces for this post</h2></div><button class="text-button">See all context <span>→</span></button></div>
             <div class="result-grid">
               <article class="evidence-card quote-card">
@@ -104,7 +100,7 @@ They’re built in the moments when you have to tell someone something they don�
             </div>
           </section>
 
-          <section class="draft-section" data-marisol-context>
+          <section class="draft-section" data-marisol-context hidden>
             <div class="section-heading"><div><p class="eyebrow">A possible direction</p><h2>Built from the pieces above</h2></div><div class="draft-actions"><button class="icon-button" aria-label="Copy draft">⧉</button><button class="icon-button" aria-label="More draft actions">•••</button></div></div>
             <article class="draft-card">
               <p>The best customer relationships aren’t built when everything goes right.</p>
