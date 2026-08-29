@@ -5,10 +5,11 @@ Configure integrations via environment variables. For production, use FastAPI Cl
 ## Clone-per-client checklist
 
 1. Fork or clone this repo for the client
-2. Deploy: `fastapi login && fastapi deploy`
-3. Set secrets (below) with `fastapi cloud env set --secret`
-4. Redeploy: `fastapi deploy`
-5. Share with the client:
+2. Create a Supabase project and connect this GitHub repo (see [DATABASE.md](DATABASE.md))
+3. Deploy: `fastapi login && fastapi deploy`
+4. Set secrets (below) with `fastapi cloud env set --secret`
+5. Redeploy: `fastapi deploy`
+6. Share with the client:
    - Base URL: `https://{app}.fastapicloud.dev`
    - API key for automation endpoints (`X-API-Key` header)
    - Webhook URLs as needed

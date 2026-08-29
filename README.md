@@ -52,6 +52,8 @@ The initial architecture is API-first:
 - **REST API first** for the app integration; add a thin MCP adapter later for agent-based experiences without duplicating business logic.
 - **Asynchronous ingestion jobs** to validate, normalize, segment, enrich, embed, and atomically publish new sources.
 
+Database schema changes are managed separately from API deploys. See [docs/DATABASE.md](docs/DATABASE.md) for Supabase setup, GitHub integration, and how to add migrations without writing SQL by hand.
+
 ## Data model
 
 All tables include `inserted_at` and `updated_at` timestamps.
