@@ -37,3 +37,22 @@ The retrieval and evidence layer is the durable product. Workflow recipes, promp
 ## Human review
 
 Generated posts and extracted voice rules require human review before publication or promotion into an authoritative client profile. The system supports the ghostwriter's process; it does not silently replace agency judgment.
+
+## Context breadcrumbs
+
+Every output that uses a client-specific metric, quote, anecdote, voice rule, or other evidence must return stable evidence references at the claim or suggestion level. The application turns those references into clickable breadcrumbs; the model must not invent source URLs.
+
+A breadcrumb should open an evidence drawer with:
+
+- The exact supporting excerpt
+- Enough surrounding context to understand the excerpt
+- Source title, type, and date
+- Speaker or author
+- Transcript timestamp, page, or character range
+- Personal, client-associated, or external classification
+- Related metrics, quotes, anecdotes, or voice observations
+- A link to open the authorized source at the relevant location
+
+The default output stays compact. Writers can progressively expand from the inline reference, to the evidence drawer, to the complete source.
+
+Composite claims may reference multiple evidence records. If an output cannot provide a valid evidence reference for a client-specific claim, it must label the claim as an unsupported suggestion or omit it.

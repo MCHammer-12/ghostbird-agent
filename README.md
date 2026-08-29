@@ -143,4 +143,5 @@ Join table for the many-to-many relationship between uploads and tags.
 - [Product decisions](docs/PRODUCT_DECISIONS.md)
 - [Ghostbird research](docs/GHOSTBIRD_RESEARCH.md)
 - [MCP and agent prompt guide](docs/MCP_AGENT_GUIDE.md)
+- [Output prompt principles](docs/OUTPUT_PROMPT_PRINCIPLES.md)
 - [Demo plan](docs/DEMO.md)
