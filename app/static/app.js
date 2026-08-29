@@ -169,13 +169,17 @@ const modes = {
     prompt: 'The best customer relationships aren’t built when everything goes right.\n\nThey’re built in the moments when you have to tell someone something they don’t want to hear.',
     hint: 'Ghostbird will surface proof and voice cues that fit this draft.',
     label: 'Enrich this post',
+    outputEyebrow: 'Grounded draft',
+    outputTitle: 'What client context changes',
   },
   create: {
     eyebrow: 'Start with an idea',
-    title: 'What should this post explore?',
+    title: 'What should we brainstorm?',
     prompt: 'An honest post about leading through an operational change — for owners who feel pressure to make every transition look seamless.',
-    hint: 'Ghostbird will find an angle, then help turn it into a first draft.',
-    label: 'Create a draft',
+    hint: 'Ghostbird will return 10 distinct directions grounded in client context.',
+    label: 'Brainstorm 10 ideas',
+    outputEyebrow: 'Idea brainstorm',
+    outputTitle: '10 directions to explore',
   },
 };
 let activeMode = 'enrich';
@@ -204,6 +208,8 @@ function selectMode(nextMode) {
   $('#writingPrompt').value = draftsByClient[activeClient][nextMode];
   $('#composerHint').textContent = mode.hint;
   $('#generateLabel').textContent = mode.label;
+  $('#outputEyebrow').textContent = mode.outputEyebrow;
+  $('#outputTitle').textContent = mode.outputTitle;
   $$('[data-mode-output]').forEach((output) => {
     output.hidden = output.dataset.modeOutput !== nextMode;
   });
@@ -215,7 +221,7 @@ $('#generateButton').addEventListener('click', () => {
   outputsVisible = true;
   syncWorkspaceOutputs();
   $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  showToast(activeMode === 'enrich' ? 'Your post is ready to enrich' : 'Your first draft is ready to shape');
+  showToast(activeMode === 'enrich' ? 'Your post is ready to enrich' : '10 ideas are ready to explore');
 });
 
 let returnFocus;

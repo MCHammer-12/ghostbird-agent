@@ -184,7 +184,7 @@ class IdeationInput(BaseModel):
     topic: str | None = None
     goal: Literal["reach", "trust", "convert"] | None = None
     audience: str | None = None
-    count: int = Field(default=3, ge=1, le=10)
+    count: int = Field(default=10, ge=1, le=10)
 
 
 class DraftInput(BaseModel):
