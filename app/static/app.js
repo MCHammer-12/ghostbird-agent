@@ -155,12 +155,12 @@ document.addEventListener("click", (event) => {
 });
 
 let activeClient = "vance_kinder";
-let outputsVisible = false;
+const completedOutputs = new Set();
 function isPreparedClient() {
   return Boolean(clients[activeClient].dbId);
 }
 function syncWorkspaceOutputs() {
-  const visible = isPreparedClient() && outputsVisible;
+  const visible = isPreparedClient() && completedOutputs.has(`${activeClient}:${activeMode}`);
   $("#resultsSection").hidden = !visible;
   $(".draft-section").hidden = !visible;
 }
@@ -235,7 +235,6 @@ const voiceProfiles = Object.fromEntries(Object.entries(clients).map(([clientId,
 function selectMode(nextMode) {
   draftsByClient[activeClient][activeMode] = $('#writingPrompt').value;
   activeMode = nextMode;
-  outputsVisible = false;
   const mode = modes[nextMode];
   const button = $(`.mode[data-mode="${nextMode}"]`);
   $$('.mode').forEach((item) => {
@@ -329,24 +328,31 @@ $('#generateButton').addEventListener('click', async () => {
   const input = $('#writingPrompt').value.trim();
   if (!input) return showToast('Add a draft or topic first');
   button.disabled = true;
+  clientButton.disabled = true;
+  $$('.mode').forEach((modeButton) => { modeButton.disabled = true; });
   label.textContent = 'Running Ghostbird agents…';
+  const requestMode = activeMode;
+  const requestClient = activeClient;
   try {
-    const clientId = clients[activeClient].dbId;
-    if (activeMode === 'enrich') {
+    const clientId = clients[requestClient].dbId;
+    if (requestMode === 'enrich') {
       const result = await apiRequest(`/demo/v1/clients/${clientId}/posts:enrich`, { draft_text: input });
       await renderEnrichment(result, input);
     } else {
       const result = await apiRequest(`/demo/v1/clients/${clientId}/posts:ideate`, { topic: input, count: 10 });
       await renderIdeas(result);
     }
-    outputsVisible = true;
+    completedOutputs.add(`${requestClient}:${requestMode}`);
+    if (activeMode !== requestMode) selectMode(requestMode);
     syncWorkspaceOutputs();
     $('#resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    showToast(activeMode === 'enrich' ? 'Live enrichment complete' : '10 live ideas generated');
+    showToast(requestMode === 'enrich' ? 'Live enrichment complete' : '10 live ideas generated');
   } catch (error) {
     showToast(`Agent error: ${error.message}`);
   } finally {
     button.disabled = false;
+    clientButton.disabled = false;
+    $$('.mode').forEach((modeButton) => { modeButton.disabled = false; });
     label.textContent = originalLabel;
   }
 });
