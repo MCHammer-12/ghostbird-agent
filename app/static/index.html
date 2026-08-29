@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ghostbird — Client context, made useful</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#workspace" aria-label="Ghostbird home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 42" fill="none"><path d="M4 12c12 0 19 4 25 1 5-2 8-8 10-12 3 7 10 6 14 3-2 6-1 10 4 15l3 4-8-2c-7 11-20 17-33 16C11 36 6 29 4 22l13 4c-4-4-8-9-13-14Z" fill="currentColor"/><circle cx="46" cy="10" r="2" fill="#283f60"/></svg></span>
+          <span>ghostbird</span>
+        </a>
+
+        <div class="client-switcher">
+          <p class="eyebrow">Writing for</p>
+          <button class="selected-client" id="clientButton" aria-expanded="false" aria-controls="clientMenu">
+            <span class="client-initials">MV</span>
+            <span><strong id="selectedClientName">Marisol Vance</strong><small id="selectedClientCompany">Vance &amp; Kinder</small></span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="client-menu" id="clientMenu" hidden>
+            <button class="client-option active" data-client="vance_kinder"><span>MV</span><b>Marisol Vance</b><small>Vance &amp; Kinder</small></button>
+            <button class="client-option" data-client="bloom_bar"><span>PC</span><b>Priya Chandrasekhar</b><small>Bloom &amp; Bar</small></button>
+            <button class="client-option" data-client="ridgeline"><span>DO</span><b>Desmond Okafor</b><small>Ridgeline</small></button>
+          </div>
+        </div>
+
+        <nav class="primary-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-view="workspace"><span>✦</span> Writing space</button>
+          <button class="nav-item" data-view="sources"><span>↗</span> Sources <em id="sourceNavCount">8</em></button>
+          <button class="nav-item" data-view="voice"><span>〰</span> Voice profile</button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="source-health"><i></i><span>Context is current</span></div>
+          <button class="help-link">? <span>How Ghostbird works</span></button>
+          <div class="user"><span>JG</span><div><b>Jarrich Grey</b><small>Ghostbird Agency</small></div><button aria-label="Account settings">•••</button></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section class="view active" id="workspaceView">
+          <header class="page-header workspace-header">
+            <div><p class="eyebrow">Writing space</p><h1>Make it sound like <i id="clientPronoun">her.</i></h1></div>
+            <button class="outline-button" id="openUpload"><span>＋</span> Add source</button>
+          </header>
+
+          <div class="mode-switch" role="tablist" aria-label="Writing mode">
+            <button class="mode active" id="enrichTab" data-mode="enrich" role="tab" aria-selected="true" aria-controls="writingPanel" tabindex="0"><span>↗</span> Enrich post</button>
+            <button class="mode" id="createTab" data-mode="create" role="tab" aria-selected="false" aria-controls="writingPanel" tabindex="-1"><span>✦</span> Create new post</button>
+          </div>
+
+          <div id="writingPanel" role="tabpanel" aria-labelledby="enrichTab">
+          <div class="workspace-grid">
+            <section class="composer-card">
+              <div class="composer-topline">
+                <div><p class="eyebrow" id="composerEyebrow">Bring a rough thought</p><h2 id="composerTitle">What are you working on?</h2></div>
+                <button class="more-button" aria-label="More options">•••</button>
+              </div>
+              <textarea id="writingPrompt" aria-label="Writing prompt">The best customer relationships aren’t built when everything goes right.
+
+They’re built in the moments when you have to tell someone something they don’t want to hear.</textarea>
+              <div class="composer-footer">
+                <button class="ghost-button">⌘ <span>Ask a question</span></button>
+                <button class="generate-button" id="generateButton"><span id="generateLabel">Find what fits</span><b>↗</b></button>
+              </div>
+            </section>
+
+            <aside class="guidance-card">
+              <div class="card-title"><span class="sun-icon">✳</span><div><p class="eyebrow">Grounding</p><h3>Use what’s true</h3></div></div>
+              <p>Ghostbird will find source-backed details and keep editorial suggestions separate.</p>
+              <div class="guidance-row"><span class="metric-icon">#</span><div><b>3 relevant details found</b><small>Metrics, anecdotes &amp; voice cues</small></div></div>
+              <div class="guidance-row"><span class="metric-icon">✓</span><div><b>Every claim gets a source</b><small>Open any breadcrumb to verify it</small></div></div>
+            </aside>
+          </div>
+          </div>
+
+          <section class="results-section" id="resultsSection" data-marisol-context>
+            <div class="section-heading"><div><p class="eyebrow">Grounded material</p><h2>Useful pieces for this post</h2></div><button class="text-button">See all context <span>→</span></button></div>
+            <div class="result-grid">
+              <article class="evidence-card quote-card">
+                <div class="evidence-meta"><span class="pill quote">Quote</span><button class="breadcrumb" data-evidence="meridian">Content interview · 02:07 <span>↗</span></button></div>
+                <blockquote>“We can’t always win on price. Steel’s steel, but we can win on your stuff shows up when we say it will.”</blockquote>
+                <footer><span class="tiny-avatar">M</span> Marisol Vance <span>•</span> Jul 9, 2026</footer>
+              </article>
+              <article class="evidence-card story-card">
+                <div class="evidence-meta"><span class="pill story">Story</span><button class="breadcrumb" data-evidence="erp">Content interview · 01:20 <span>↗</span></button></div>
+                <h3>Transparency before it becomes a problem</h3>
+                <p>During a two-day ERP transition, a warehouse lead caught an order headed to the wrong facility. Marisol proactively warned top accounts about possible hiccups.</p>
+                <button class="inline-link" data-evidence="erp">Open source context <span>→</span></button>
+              </article>
+              <article class="evidence-card metric-card">
+                <div class="evidence-meta"><span class="pill metric">Metric</span><button class="breadcrumb" data-evidence="growth">Content interview · 02:42 <span>↗</span></button></div>
+                <strong>40%</strong>
+                <p>year-over-year revenue growth, with three new hires this quarter.</p>
+                <button class="inline-link" data-evidence="growth">Open source context <span>→</span></button>
+              </article>
+            </div>
+          </section>
+
+          <section class="draft-section" data-marisol-context>
+            <div class="section-heading"><div><p class="eyebrow">A possible direction</p><h2>Built from the pieces above</h2></div><div class="draft-actions"><button class="icon-button" aria-label="Copy draft">⧉</button><button class="icon-button" aria-label="More draft actions">•••</button></div></div>
+            <article class="draft-card">
+              <p>The best customer relationships aren’t built when everything goes right.</p>
+              <p>They’re built in the moments when you have to tell someone something they don’t want to hear.</p>
+              <p>When we switched inventory systems, we had a two-day window where both systems were half-working. We almost shipped an order to the wrong facility.</p>
+              <p>We caught it. Then we told our top customers what was happening before they found out the hard way. <button class="citation" data-evidence="erp">[1]</button></p>
+              <p>Two of them wrote back just to say thanks for the heads up.</p>
+              <p>My dad always said, “Bad news doesn’t get better with age.” <button class="citation" data-evidence="dad">[2]</button> I finally understand what he meant.</p>
+              <p class="draft-note"><span>✦</span> Editorial draft. Verify details and make it yours before sending.</p>
+            </article>
+          </section>
+          <section class="empty-context" id="emptyWorkspaceContext" hidden>
+            <p class="eyebrow">Writing context</p><h2>Start with a source.</h2><p>This demo has prepared context for Marisol. Add a source to build an isolated workspace for this client.</p><button class="outline-button empty-upload">＋ Add source</button>
+          </section>
+        </section>
+
+        <section class="view" id="sourcesView">
+          <header class="page-header"><div><p class="eyebrow">Client context</p><h1>Sources for <i id="sourceClientName">Marisol.</i></h1><p class="header-support">Interviews, notes, and client feedback that make the writing specific.</p></div><button class="generate-button" id="sourceUploadButton">＋ Add source</button></header>
+          <div class="source-summary"><div><span class="source-total" id="sourceTotal">8</span><span>sources available for writing</span></div><span class="health-badge"><i></i> All processed</span></div>
+          <div class="source-list" data-marisol-context>
+            <article><span class="source-type transcript">⌁</span><div><p>Vance &amp; Kinder × Ghostbird Content Interview</p><small>Aug 20, 2026 · 6 min · Marisol Vance, Jarrich Grey</small></div><span class="ready">Ready</span><button aria-label="Source options">•••</button></article>
+            <article><span class="source-type email">✉</span><div><p>Re: Drafts from July content call</p><small>Jul 11, 2026 · Email thread · Marisol Vance</small></div><span class="ready">Ready</span><button aria-label="Source options">•••</button></article>
+            <article><span class="source-type transcript">⌁</span><div><p>Vance &amp; Kinder × Ghostbird Content Interview</p><small>Jul 9, 2026 · 10 min · Marisol Vance, Jarrich Grey</small></div><span class="ready">Ready</span><button aria-label="Source options">•••</button></article>
+            <article><span class="source-type doc">▤</span><div><p>Vance &amp; Kinder brand notes</p><small>Jun 28, 2026 · Internal notes</small></div><span class="ready">Ready</span><button aria-label="Source options">•••</button></article>
+          </div>
+          <section class="empty-context compact" id="emptySourceContext" hidden><h2>No sources yet</h2><p>Add client-approved interviews, feedback, or notes to make this writing context useful.</p></section>
+        </section>
+
+        <section class="view" id="voiceView">
+          <header class="page-header"><div><p class="eyebrow">Client context</p><h1><span id="voiceClientName">Marisol</span>’s <i>voice.</i></h1><p class="header-support">A living, editable point of view — grounded in source material.</p></div><button class="generate-button" id="saveProfile">Save changes</button></header>
+          <div class="voice-layout">
+            <aside class="voice-aside" data-marisol-context><p class="eyebrow">Profile status</p><div class="voice-status"><span>✓</span><div><b>Reviewed</b><small>Updated Aug 20</small></div></div><hr><p>Sources that inform this profile</p><button class="source-link" data-evidence="meridian">2 content interviews <span>→</span></button><button class="source-link" data-evidence="feedback">1 client feedback thread <span>→</span></button><hr><p class="voice-warning"><span>✦</span> Voice cues guide a draft. They are not rules a writer has to follow.</p></aside>
+            <section class="markdown-editor"><div class="editor-toolbar"><span>Markdown</span><span>Auto-saved just now</span></div><textarea aria-label="Marisol Vance voice profile"># Marisol Vance — voice profile
+
+## The feeling
+Practical, candid, and quietly proud. Marisol tells stories like she is talking across a desk — never performing expertise, but clearly the person who has done the work.
+
+## What to lean into
+- Specific details over abstractions: *nine years*, *two missed ship dates*, *a $4,000 first sale*.
+- Plainspoken leadership lessons earned from an actual moment.
+- Her family-business perspective, without making every post sentimental.
+- A little dry humor when it naturally belongs.
+
+## How she sounds
+Short to medium sentences. Conversational openers. She will say “honestly,” “kind of,” or “basically,” but the published post can be a little cleaner than her spoken voice.
+
+## Avoid
+- Generic motivational language.
+- Big, polished claims about disruption or innovation.
+- Making a lesson sound too neat. Let the mess stay visible.
+
+## Evidence notes
+Her edits favor exact details over round numbers. She explicitly preferred “nine years with their previous supplier” to “a decade.”</textarea></section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="uploadModal" hidden>
+      <section class="upload-modal" aria-modal="true" role="dialog" aria-labelledby="uploadTitle">
+        <button class="close-modal" id="closeUpload" aria-label="Close">×</button>
+        <p class="eyebrow">Add client context</p><h2 id="uploadTitle">What should Ghostbird know?</h2><p class="modal-support">Add a transcript, notes, or feedback. We’ll keep it attached to this client’s context only.</p>
+        <label class="dropzone"><input type="file" hidden /><span>↥</span><b>Drop a file or browse</b><small>TXT, PDF, DOCX, or paste text below</small></label>
+        <label class="field-label">Paste text <textarea placeholder="Or paste a call transcript, email, or notes here…"></textarea></label>
+        <div class="two-fields"><label class="field-label">Source type <select><option>Content interview</option><option>Client feedback</option><option>Internal notes</option><option>Published post</option></select></label><label class="field-label">Purpose <select><option>Find stories and details</option><option>Learn writing voice</option><option>Review an upcoming post</option></select></label></div>
+        <details><summary>Optional clarification questions <span>+</span></summary><p>Answer only if the source needs more context. Otherwise, leave these for review.</p><div class="clarification-fields"><label class="field-label">Who is speaking? <input type="text" placeholder="e.g. Marisol Vance and Jarrich Grey" /></label><label class="field-label">How should Ghostbird use this? <select><option>Client context</option><option>External inspiration</option><option>Needs review</option></select></label></div></details>
+        <button class="generate-button full-width" id="prepareSource">Prepare source <span>→</span></button>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="statusModal" hidden>
+      <section class="status-modal" aria-modal="true" aria-labelledby="statusTitle" role="dialog" tabindex="-1">
+        <div class="processing-orbit"><span></span></div><p class="eyebrow">Ingestion status</p><h2 id="statusTitle">Making this useful</h2><p id="statusCopy">Reading the source, finding moments that matter, and adding it to Marisol’s private context.</p>
+        <div class="process-steps"><span class="complete">✓ Read source</span><span class="complete">✓ Identify people &amp; context</span><span id="statusStep">○ Extract usable details</span><span>○ Ready for writing</span></div>
+        <button class="outline-button" id="closeStatus" hidden>Done</button>
+      </section>
+    </div>
+
+    <aside class="evidence-drawer" id="evidenceDrawer" aria-label="Source evidence" aria-hidden="true" aria-modal="true" role="dialog" inert>
+      <div class="drawer-header"><div><p class="eyebrow">Source context</p><h2 id="drawerTitle">Content interview</h2></div><button id="closeDrawer" aria-label="Close source context">×</button></div>
+      <div class="drawer-source"><span class="source-type transcript" id="drawerSourceType">⌁</span><div><b id="drawerSource">Vance &amp; Kinder × Ghostbird Content Interview</b><small id="drawerMeta">Jul 9, 2026 · Marisol Vance · 02:07–02:28</small></div></div>
+      <div class="transcript-context"><p class="context-label">Before</p><p id="drawerBefore">Their procurement guy called us because he remembered we talked a lot about lead times.</p><p class="context-label">Exact source</p><blockquote id="drawerQuote">“We can’t always win on price, steel’s steel, but we can win on your stuff shows up when we say it will.”</blockquote><p class="context-label">After</p><p id="drawerAfter">We’re up about forty percent year over year. Which is wild because I keep waiting for it to slow down.</p></div>
+      <div class="drawer-tags"><span>Client story</span><span>Reliable lead times</span><span>Voice cue</span></div>
+      <button class="outline-button drawer-open">Open full source <span>↗</span></button>
+    </aside>
+    <div class="drawer-scrim" id="drawerScrim" hidden></div>
+    <div class="toast" id="toast" role="status" hidden>Voice profile saved</div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

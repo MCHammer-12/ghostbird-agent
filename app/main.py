@@ -1,5 +1,9 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
 from app.errors import register_error_handlers
@@ -16,6 +20,7 @@ from app.routers import (
 )
 
 settings = get_settings()
+static_directory = Path(__file__).parent / "static"
 
 configure_logging(settings.environment)
 
@@ -58,3 +63,11 @@ app.include_router(drafts.router)
 # Template automation endpoints, unchanged.
 app.include_router(automations.router)
 app.include_router(webhooks.router)
+
+app.mount("/static", StaticFiles(directory=static_directory), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def product_ui() -> FileResponse:
+    """Serve the standalone Ghostbird product prototype."""
+    return FileResponse(static_directory / "index.html")
