@@ -1,0 +1,42 @@
+{
+  "expected_statuses": {
+    "SYN01A7F3K9M2QW8B4XN6P0RTD": "ready",
+    "SYN01A7F3K9M2QW8B4XN6P0RTE": "ready",
+    "SYNTHREAD0001": "ready",
+    "SYNTHREAD0002": "ignored"
+  },
+  "required_metrics": [
+    ["customer_relationship_duration", "nine years"],
+    ["missed_ship_dates", "two ship dates in a row"],
+    ["year_over_year_growth", "about forty percent"],
+    ["new_hires", "three new people this quarter"],
+    ["deal_value", "like four thousand dollars"],
+    ["race_mile", "mile ten"],
+    ["system_transition_window", "a two day window"],
+    ["customer_responses", "Two different customers"],
+    ["price_increase", "eight percent"],
+    ["accounts_lost", "one small account"]
+  ],
+  "required_quote_fragments": [
+    "We can't always win on price",
+    "put your dad on the phone",
+    "Everybody starts small",
+    "bad news doesn't get better with age",
+    "nine is the actual number"
+  ],
+  "required_anecdote_terms": [
+    ["Meridian", "nine-year", "ship dates"],
+    ["put her father", "top-twenty", "referred"],
+    ["Colton", "$4,000", "mentoring"],
+    ["ERP", "warehouse lead", "wrong facility"],
+    ["8%", "one small account", "transparent"]
+  ],
+  "required_voice_terms": [
+    "candid",
+    "dry humor",
+    "nine years",
+    "a decade",
+    "Stock imagery",
+    "Evidence"
+  ]
+}

@@ -15,9 +15,11 @@ Ask at most three high-value questions in one batch. The user may skip them. Ski
 
 Do not interrupt clear uploads. If the client, source type, speakers, and purpose can be inferred confidently, ingestion should continue without questions.
 
-## Voice-observation agent
+## Voice Profile Agent
 
-Add a voice-observation agent alongside the metric, quote, and anecdote agents. It extracts evidence-backed observations about vocabulary, cadence, directness, humor, sentence structure, storytelling, formatting, hooks, closers, and client corrections.
+Use one Voice Profile Agent alongside the metric, quote, and anecdote agents. It maintains one complete Markdown document in `clients.writing_style`, replacing that value whenever new approved voice evidence is incorporated. Do not create separate voice-observation rows or a second profile-synthesis agent.
+
+The Markdown profile contains evidence-backed observations about vocabulary, cadence, directness, humor, sentence structure, storytelling, formatting, hooks, closers, and client corrections.
 
 Voice inputs should be weighted by what they are best able to prove:
 
@@ -26,7 +28,7 @@ Voice inputs should be weighted by what they are best able to prove:
 - Client edits are strongest for hard preferences, boundaries, and negative rules.
 - AI-generated drafts, third-party writing, and unverified material are not voice evidence unless explicitly approved by the client.
 
-The voice profile must retain links to supporting examples and distinguish spoken voice from approved written voice.
+The Markdown profile must retain supporting evidence references and distinguish spoken voice from approved written voice.
 
 ## Configurable writing workflow
 

@@ -13,6 +13,7 @@ from app.routers import (
     automations,
     drafts,
     evidence,
+    ghostbird,
     health,
     search,
     sources,
@@ -71,3 +72,6 @@ app.mount("/static", StaticFiles(directory=static_directory), name="static")
 def product_ui() -> FileResponse:
     """Serve the standalone Ghostbird product prototype."""
     return FileResponse(static_directory / "index.html")
+
+
+app.include_router(ghostbird.router)

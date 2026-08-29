@@ -40,8 +40,8 @@ class IntakeAnalysis(BaseModel):
 
 
 class EvidenceCandidate(BaseModel):
-    excerpt: str
-    source_location: str
+    excerpt: str = Field(min_length=1)
+    source_location: str = Field(min_length=1)
     scope: EvidenceScope
     confidence: float = Field(ge=0, le=1)
     review_status: ReviewStatus = ReviewStatus.PROPOSED
@@ -81,7 +81,7 @@ class AnecdoteCandidate(EvidenceCandidate):
 
 class VoiceProfileCandidate(BaseModel):
     markdown: str
-    supporting_locations: list[str]
+    supporting_evidence_ids: list[str]
     confidence: float = Field(ge=0, le=1)
 
 
@@ -118,6 +118,7 @@ class VoiceProfile(BaseModel):
     markdown: str
     evidence_ids: list[str]
     prompt_version: str
+    version: str | None = None
 
 
 class AgentWriteResult(BaseModel):
@@ -129,7 +130,7 @@ class AgentWriteResult(BaseModel):
 class IngestionResult(BaseModel):
     client_id: str
     source_id: str
-    status: Literal["needs_clarification", "ready"]
+    status: Literal["needs_clarification", "ignored", "ready"]
     intake: IntakeAnalysis
     writes: list[AgentWriteResult] = Field(default_factory=list)
 
@@ -139,11 +140,24 @@ class EvidenceReference(BaseModel):
     reason: str
 
 
+class VerificationIssue(BaseModel):
+    issue_type: str
+    severity: Literal["warning", "error"]
+    message: str
+    evidence_ids: list[str] = Field(default_factory=list)
+
+
+class OutputVerification(BaseModel):
+    valid: bool
+    issues: list[VerificationIssue] = Field(default_factory=list)
+
+
 class EnrichedPost(BaseModel):
     enriched_post: str
     references: list[EvidenceReference]
     changes: list[str]
     unsupported_suggestions: list[str] = Field(default_factory=list)
+    verification: OutputVerification | None = None
 
 
 class PostIdea(BaseModel):
@@ -157,4 +171,30 @@ class PostIdea(BaseModel):
 
 class IdeationResult(BaseModel):
     ideas: list[PostIdea]
+    verification: OutputVerification | None = None
 
+
+class EnrichmentInput(BaseModel):
+    draft_text: str
+    goal: Literal["reach", "trust", "convert"] | None = None
+    audience: str | None = None
+
+
+class IdeationInput(BaseModel):
+    topic: str | None = None
+    goal: Literal["reach", "trust", "convert"] | None = None
+    audience: str | None = None
+    count: int = Field(default=3, ge=1, le=10)
+
+
+class DraftInput(BaseModel):
+    idea: str
+    goal: Literal["reach", "trust", "convert"]
+    audience: str | None = None
+    guidance: str | None = None
+
+
+class DraftedPost(BaseModel):
+    post: str
+    references: list[EvidenceReference]
+    verification: OutputVerification | None = None

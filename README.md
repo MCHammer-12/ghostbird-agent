@@ -35,7 +35,7 @@ A writer starts with an idea, goal, industry, client, target audience, and writi
    - Metrics
    - Quotes, including text and speaker
    - Anecdotes and stories
-   - Opinions and voice cues
+   - One evidence-backed Markdown voice profile per client
    - Images and image metadata
    - Client, date, source, and supporting context
 4. **Evidence retrieval** - Retrieve relevant, compact source excerpts for a client and task; do not return an entire transcript by default.
@@ -50,7 +50,9 @@ The initial architecture is API-first:
 - **Supabase Postgres with pgvector** for client-scoped data, metadata, and semantic retrieval.
 - **One shared retrieval core** for ingestion, authorization, retrieval, audit, and generation grounding.
 - **REST API first** for the app integration; add a thin MCP adapter later for agent-based experiences without duplicating business logic.
-- **Asynchronous ingestion jobs** to validate, normalize, segment, enrich, embed, and atomically publish new sources.
+- **Independent extraction agents** with narrow, idempotent writes for metrics, quotes, and anecdotes.
+- **One Voice Profile Agent** that maintains the client's `writing_style` Markdown cell.
+- **Safe publishing state** so partially failed or ambiguous uploads cannot enter writer retrieval.
 
 Database schema changes are managed separately from API deploys. See [docs/DATABASE.md](docs/DATABASE.md) for Supabase setup, GitHub integration, and how to add migrations without writing SQL by hand.
 
@@ -64,6 +66,7 @@ All tables include `inserted_at` and `updated_at` timestamps.
 - `name`
 - `summary` - includes goals
 - `writing_style` - markdown
+- `writing_style_prompt_version`
 
 ### uploads
 
@@ -72,6 +75,22 @@ All tables include `inserted_at` and `updated_at` timestamps.
 - `summary`
 - `created_at`
 - `client_id` - foreign key to `clients`
+- `source_type` - transcript, email, LinkedIn post, notes, or another supported source
+- `purpose`
+- `ingestion_status`
+
+LinkedIn posts are uploads. Their draft, approved, published, or client-edited state belongs in upload metadata rather than a separate posts table.
+
+### metrics, quotes, and anecdotes
+
+Each extraction table contains:
+
+- A stable evidence ID
+- `client_id` and `upload_id`
+- Exact excerpt and source location
+- Personal, client-associated, external, or unknown scope
+- Confidence and review status
+- Type-specific structured fields
 
 ### tags
 
@@ -147,3 +166,26 @@ Join table for the many-to-many relationship between uploads and tags.
 - [MCP and agent prompt guide](docs/MCP_AGENT_GUIDE.md)
 - [Output prompt principles](docs/OUTPUT_PROMPT_PRINCIPLES.md)
 - [Demo plan](docs/DEMO.md)
+- [V1 implementation plan](plans/2026-08-29-ghostbird-v1.md)
+
+## V1 verification
+
+Run the complete local test suite:
+
+```bash
+uv run python -m unittest discover -v
+```
+
+Run the recorded Marisol contract evaluation:
+
+```bash
+uv run python -m evals.marisol.run
+```
+
+Run the prompts against the configured LLM provider:
+
+```bash
+uv run python -m evals.marisol.run_live
+```
+
+The live run requires one provider key in `.env`. The recorded run verifies schemas, exact evidence excerpts, required Marisol facts and stories, idempotency, irrelevant-source handling, and client isolation without making paid model calls.

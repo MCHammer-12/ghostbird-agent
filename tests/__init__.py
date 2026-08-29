@@ -1,0 +1,1 @@
+"""Ghostbird tests."""

@@ -50,7 +50,7 @@ See [CREDENTIALS.md](CREDENTIALS.md) for full details.
 ### 4. Confirm the first migration ran
 
 1. In Supabase: **Database → Migrations**. You should see `20260829120000_initial_schema` (or similar) with a success status.
-2. In Supabase: **Database → Tables**. You should see `clients`, `uploads`, `tags`, `uploads__tags`, and `posts`.
+2. In Supabase: **Database → Tables**. You should see `clients`, `uploads`, `tags`, and `uploads__tags`, plus any tables added by later migrations.
 
 If the migration failed, open the deployment log in Supabase (Integrations → GitHub → recent deploys) and fix the SQL before pushing again.
 
@@ -147,3 +147,5 @@ Most fork owners can skip the CLI entirely and rely on GitHub + Supabase dashboa
 ## Current schema reference
 
 The live schema is defined by all files in `supabase/migrations/`. The product-level summary is in the [Data model section of README.md](../README.md#data-model).
+
+LinkedIn posts are stored in `uploads` with an appropriate `source_type`; there is no separate `posts` table. The client's complete Markdown voice profile is stored in `clients.writing_style`.

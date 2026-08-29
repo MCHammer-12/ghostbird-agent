@@ -23,4 +23,4 @@ Use these Markdown sections:
 6. `## Avoid`
 7. `## Evidence`
 
-Keep observations specific and behavioral. Preserve distinctions between spoken voice and approved written style. Cite source locations in the Evidence section. If evidence is insufficient for a section, say so rather than inventing a rule.
+Keep observations specific and behavioral. Preserve distinctions between spoken voice and approved written style. Cite the supplied stable evidence IDs in the Evidence section and return the IDs in `supporting_evidence_ids`. Never invent an ID. If evidence is insufficient for a section, say so rather than inventing a rule.

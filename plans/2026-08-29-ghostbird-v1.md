@@ -4,7 +4,7 @@
 
 ## Context
 
-Build the first working agent layer against the existing FastAPI template and synthetic client corpus. Extraction agents may write their own bounded record types directly. The Voice Profile Agent owns one Markdown profile per client rather than a collection of voice-observation rows.
+Build the first working agent layer against the existing FastAPI template and synthetic client corpus. Extraction agents may write their own bounded record types directly. The Voice Profile Agent owns the existing `clients.writing_style` Markdown cell rather than a collection of voice-observation rows.
 
 ## Approach
 

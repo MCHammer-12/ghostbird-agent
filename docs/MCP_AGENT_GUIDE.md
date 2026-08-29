@@ -13,12 +13,12 @@ Use model prompts for extraction judgment. Use typed tool contracts around retri
 ```text
 classify upload
   -> clarify if material ambiguity remains
-  -> run metric, quote, anecdote, and voice extractors
-  -> validate, link, and deduplicate
-  -> persist one evidence batch
+  -> run metric, quote, and anecdote extractors with narrow write tools
+  -> run the Voice Profile Agent with one client-profile update tool
+  -> validate, link, and deduplicate records
 ```
 
-Extractors are read-only and return proposed records. They do not write directly to the database. Only the orchestrator receives the persistence tool.
+Each extractor may persist its own record type directly through a narrow, idempotent tool. It never receives arbitrary SQL, another extractor's write tool, or cross-client access. The orchestrator coordinates the run and reports partial failures; it is not the sole database writer.
 
 ## Specialist prompt contract
 
@@ -40,12 +40,14 @@ Keep instructions short and enforce valid output through the schema rather than 
 - `ghostbird.extract_metrics`
 - `ghostbird.extract_quotes`
 - `ghostbird.extract_anecdotes`
-- `ghostbird.observe_voice`
+- `ghostbird.update_voice_profile`
 - `ghostbird.link_extractions`
-- `ghostbird.persist_evidence_batch`
+- `ghostbird.upsert_metrics`
+- `ghostbird.upsert_quotes`
+- `ghostbird.upsert_anecdotes`
 - `ghostbird.retrieve_evidence`
 
-Writer agents should receive read-only retrieval tools. Extraction agents should not receive persistence, external-action, or cross-client tools.
+Writer agents receive read-only retrieval tools. Each extraction agent receives exactly one type-specific persistence tool. The Voice Profile Agent may replace only the selected client's `writing_style` Markdown cell. No agent receives arbitrary database, external-action, or cross-client tools.
 
 ## Shared extraction envelope
 

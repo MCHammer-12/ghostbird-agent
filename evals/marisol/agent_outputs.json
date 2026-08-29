@@ -1,0 +1,383 @@
+{
+  "SYN01A7F3K9M2QW8B4XN6P0RTD": {
+    "intake": {
+      "source_type": "call_transcript",
+      "purpose": "Monthly content interview used to identify post material and client voice",
+      "relevance": "relevant",
+      "scope": "personal",
+      "speakers": ["Marisol Vance", "Jarrich Grey"],
+      "clarification_questions": [],
+      "notes": ["Speaker identities and client relationship are explicit in the source metadata."]
+    },
+    "metric": {
+      "records": [
+        {
+          "metric_type": "customer_relationship_duration",
+          "value_text": "nine years",
+          "normalized_value": 9,
+          "unit": "years",
+          "subject": "Meridian Air Systems' relationship with its previous supplier",
+          "context": "The length of the incumbent relationship Vance & Kinder displaced.",
+          "excerpt": "They're an HVAC manufacturer out of Ohio, decent size, and they were with our biggest competitor for like nine years.",
+          "source_location": "transcript:57.85-74.91",
+          "scope": "client_associated",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "missed_ship_dates",
+          "value_text": "two ship dates in a row",
+          "normalized_value": 2,
+          "unit": "ship_dates",
+          "subject": "Meridian's previous supplier",
+          "context": "The service failure that created an opening for Vance & Kinder.",
+          "excerpt": "Their old supplier missed two ship dates in a row on a rush order and it cost them a production line shutdown.",
+          "source_location": "transcript:80.64-111.23",
+          "scope": "client_associated",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "year_over_year_growth",
+          "value_text": "about forty percent",
+          "normalized_value": 40,
+          "unit": "percent",
+          "subject": "Vance & Kinder revenue",
+          "context": "Approximate year-over-year revenue growth at the time of the interview.",
+          "excerpt": "We're up about forty percent year over year. Which is wild because I keep waiting for it to slow down and it just hasn't.",
+          "source_location": "transcript:162.10-176.22",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "new_hires",
+          "value_text": "three new people this quarter",
+          "normalized_value": 3,
+          "unit": "people",
+          "subject": "Vance & Kinder hiring",
+          "context": "Two warehouse hires and one inside sales hire during the quarter.",
+          "excerpt": "Yeah, three new people this quarter. Two in the warehouse, one inside sales rep, kid named Colton, twenty-four years old, first real sales job.",
+          "source_location": "transcript:181.36-195.48",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "deal_value",
+          "value_text": "like four thousand dollars",
+          "normalized_value": 4000,
+          "unit": "USD",
+          "subject": "Colton's first independently closed deal",
+          "context": "A small first sale used in a mentoring story.",
+          "excerpt": "So he's brand new, still learning the product line, and he closed his first deal on his own last week. Small account, like four thousand dollars, but he called me practically shaking he was so excited.",
+          "source_location": "transcript:361.69-382.87",
+          "scope": "client_associated",
+          "confidence": 0.98
+        }
+      ],
+      "warnings": []
+    },
+    "quote": {
+      "records": [
+        {
+          "quote_text": "We can't always win on price, steel's steel, but we can win on your stuff shows up when we say it will.",
+          "speaker": "Marisol Vance",
+          "speaker_type": "client",
+          "quote_type": "direct",
+          "context": "Marisol explains Vance & Kinder's competitive position after the Meridian win.",
+          "excerpt": "Exactly. And honestly that's kind of been our whole thing since I took over. We can't always win on price, steel's steel, but we can win on your stuff shows up when we say it will.",
+          "source_location": "transcript:126.96-148.14",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "quote_text": "well, can you put your dad on the phone",
+          "speaker": "Big Sky Fabrication owner",
+          "speaker_type": "customer",
+          "quote_type": "remembered",
+          "context": "Marisol recalls a longtime customer doubting her authority after she took over the company.",
+          "excerpt": "And I said, this is Marisol, I run the company now, how can I help? And he just goes quiet for a second and then says well, can you put your dad on the phone.",
+          "source_location": "transcript:253.41-274.00",
+          "scope": "client_associated",
+          "confidence": 0.96
+        },
+        {
+          "quote_text": "Everybody starts small. I think sometimes owners forget to say that out loud to new people.",
+          "speaker": "Marisol Vance",
+          "speaker_type": "client",
+          "quote_type": "direct",
+          "context": "Marisol reflects on encouraging a new salesperson after his first close.",
+          "excerpt": "I told him I still remember my first sale after I took over, and it was smaller than his. Everybody starts small. I think sometimes owners forget to say that out loud to new people.",
+          "source_location": "transcript:390.36-410.95",
+          "scope": "personal",
+          "confidence": 0.99
+        }
+      ],
+      "warnings": []
+    },
+    "anecdote": {
+      "records": [
+        {
+          "summary": "Vance & Kinder won Meridian after a nine-year incumbent missed two rush-order ship dates and shut down a production line.",
+          "full_story": "Meridian had used a competitor for roughly nine years. After that supplier missed two consecutive ship dates on a rush order, Meridian remembered a Vance & Kinder rep from a trade show a year earlier and called because the company had emphasized dependable lead times.",
+          "narrator": "Marisol Vance",
+          "people": ["Marisol Vance", "Meridian procurement contact", "Vance & Kinder sales representative"],
+          "setup": "Meridian had a long-standing incumbent supplier.",
+          "tension": "The incumbent missed two consecutive rush-order ship dates and caused a production shutdown.",
+          "action": "Meridian contacted Vance & Kinder after remembering its lead-time message from a trade show.",
+          "outcome": "Vance & Kinder won the account.",
+          "lesson": "A memorable operational promise can create demand long after the first sales interaction.",
+          "related_evidence_hints": ["nine-year incumbent", "two missed ship dates", "lead times"],
+          "excerpt": "Their old supplier missed two ship dates in a row on a rush order and it cost them a production line shutdown. Their procurement guy called us because he'd met one of our reps at a trade show like a year ago and just remembered we talked a lot about lead times.",
+          "source_location": "transcript:80.64-111.23",
+          "scope": "client_associated",
+          "confidence": 0.98
+        },
+        {
+          "summary": "A longtime customer asked Marisol to put her father on the phone after she took over, then became a top-twenty account and referred two other shops.",
+          "full_story": "After Marisol took over the family business, a customer dating to about 1994 asked to speak to her father. She calmly explained that she had already run operations for three years and handled the order. Two weeks later he acknowledged her expertise. The company remains a top-twenty account and referred two Montana fabrication shops.",
+          "narrator": "Marisol Vance",
+          "people": ["Marisol Vance", "Gary Vance", "Big Sky Fabrication owner"],
+          "setup": "Marisol had recently taken over her father's company.",
+          "tension": "A longtime customer did not accept that she was now in charge.",
+          "action": "She stayed calm, explained her operating experience, and handled his order.",
+          "outcome": "He recognized her expertise, remained a customer, and sent referrals.",
+          "lesson": "Credibility can be demonstrated through calm competence rather than demanded.",
+          "related_evidence_hints": ["1994", "three years running operations", "top twenty", "two referrals"],
+          "excerpt": "I didn't get mad, which honestly surprised me. I just said, he retired, but I've been running ops here for three years already, so I promise I know your account better than he does at this point. What do you need? And I just helped him with his order like normal.",
+          "source_location": "transcript:278.55-308.55",
+          "scope": "personal",
+          "confidence": 0.98
+        },
+        {
+          "summary": "In a mentoring moment, Marisol encouraged Colton after his first $4,000 close by reminding him that her first sale was even smaller.",
+          "full_story": "Colton, a 24-year-old inside sales rep in his first sales job, closed a roughly $4,000 account by himself and called Marisol shaking with excitement. She told him that everyone starts small and that her first sale after taking over had been smaller than his.",
+          "narrator": "Marisol Vance",
+          "people": ["Marisol Vance", "Colton"],
+          "setup": "Colton was new to sales and still learning the product line.",
+          "tension": "His first independent deal was small, but emotionally significant.",
+          "action": "Marisol contextualized the milestone with her own smaller first sale.",
+          "outcome": "The moment became a concrete example of mentoring new employees.",
+          "lesson": "Leaders should say out loud that everybody starts small.",
+          "related_evidence_hints": ["$4,000", "24 years old", "Everybody starts small"],
+          "excerpt": "I told him I still remember my first sale after I took over, and it was smaller than his. Everybody starts small. I think sometimes owners forget to say that out loud to new people.",
+          "source_location": "transcript:390.36-410.95",
+          "scope": "personal",
+          "confidence": 0.97
+        }
+      ],
+      "warnings": []
+    },
+    "voice_profile": {
+      "markdown": "# Voice Profile\n\n## Natural spoken voice\nMarisol is conversational, candid, and concrete. She uses informal transitions such as ‘honestly,’ light self-deprecation, and specific operational details.\n\n## LinkedIn writing preferences\nInsufficient approved-post evidence so far. Preserve exact figures rather than smoothing them into round numbers.\n\n## Recurring beliefs and perspectives\nReliability beats price when a supplier does what it promised. Leaders should normalize small beginnings for new employees. Competence is demonstrated through the work.\n\n## Positive examples\n- ‘We can't always win on price, steel's steel, but we can win on your stuff shows up when we say it will.’\n- ‘Which, low bar, but I'll take it.’\n\n## Avoid\n- Inflating approximate numbers into exact claims.\n- Polished corporate language that removes her dry humor.\n\n## Evidence\n- transcript:126.96-148.14\n- transcript:309.65-329.65\n- transcript:390.36-410.95",
+      "supporting_locations": ["transcript:126.96-148.14", "transcript:390.36-410.95"],
+      "confidence": 0.91
+    }
+  },
+  "SYN01A7F3K9M2QW8B4XN6P0RTE": {
+    "intake": {
+      "source_type": "call_transcript",
+      "purpose": "Monthly follow-up content interview",
+      "relevance": "relevant",
+      "scope": "personal",
+      "speakers": ["Marisol Vance", "Jarrich Grey"],
+      "clarification_questions": [],
+      "notes": []
+    },
+    "metric": {
+      "records": [
+        {
+          "metric_type": "race_mile",
+          "value_text": "mile ten",
+          "normalized_value": 10,
+          "unit": "mile",
+          "subject": "Marisol's half-marathon cramp",
+          "context": "The point in the race where Marisol nearly needed help.",
+          "excerpt": "I finished! Barely. I cramped so bad at mile ten I thought Dave was going to have to carry me.",
+          "source_location": "transcript:4.63-16.39",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "system_transition_window",
+          "value_text": "a two day window",
+          "normalized_value": 2,
+          "unit": "days",
+          "subject": "ERP migration overlap",
+          "context": "The period when both inventory systems were only partly working.",
+          "excerpt": "We had a two day window where the new system and old system were both half working, and we almost shipped an order to the wrong facility.",
+          "source_location": "transcript:53.72-76.66",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "customer_responses",
+          "value_text": "Two different customers",
+          "normalized_value": 2,
+          "unit": "customers",
+          "subject": "Responses to Marisol's ERP warning",
+          "context": "Customers who thanked the company for proactively disclosing migration risk.",
+          "excerpt": "Way better than I expected. Two different customers wrote back just saying thanks for the heads up, one of them said most of their vendors would never admit something like that.",
+          "source_location": "transcript:115.18-133.42",
+          "scope": "client_associated",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "price_increase",
+          "value_text": "eight percent",
+          "normalized_value": 8,
+          "unit": "percent",
+          "subject": "Vance & Kinder price increase",
+          "context": "A steel-tariff-related customer price increase.",
+          "excerpt": "We did, eight percent, because of the tariff stuff on steel. I was honestly dreading those calls.",
+          "source_location": "transcript:174.29-184.29",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "metric_type": "accounts_lost",
+          "value_text": "one small account",
+          "normalized_value": 1,
+          "unit": "account",
+          "subject": "Customer loss after the price increase",
+          "context": "The only stated account loss after transparent price communication.",
+          "excerpt": "We lost one small account over it, but a couple of the bigger ones actually thanked us for being upfront instead of quietly padding invoices like some of our competitors do.",
+          "source_location": "transcript:188.25-224.72",
+          "scope": "personal",
+          "confidence": 0.99
+        }
+      ],
+      "warnings": []
+    },
+    "quote": {
+      "records": [
+        {
+          "quote_text": "if he touched me I'd never speak to him again",
+          "speaker": "Marisol Vance",
+          "speaker_type": "client",
+          "quote_type": "direct",
+          "context": "A humorous description of refusing help during her half marathon.",
+          "excerpt": "He offered. I told him if he touched me I'd never speak to him again, out of pure stubbornness I finished on my own two feet.",
+          "source_location": "transcript:20.35-35.64",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "quote_text": "bad news doesn't get better with age",
+          "speaker": "Marisol's father",
+          "speaker_type": "family_member",
+          "quote_type": "remembered",
+          "context": "A saying Marisol connected to proactively warning customers about ERP risk.",
+          "excerpt": "Yeah, my dad actually used to say something like bad news doesn't get better with age, and I finally understood what he meant by that.",
+          "source_location": "transcript:147.97-162.68",
+          "scope": "client_associated",
+          "confidence": 0.92
+        }
+      ],
+      "warnings": []
+    },
+    "anecdote": {
+      "records": [
+        {
+          "summary": "During a messy ERP transition, a warehouse lead's manual double-check prevented a shipment from going to the wrong facility, so Marisol warned top customers before any further problems occurred.",
+          "full_story": "The old and new inventory systems were both partly working for two days. A warehouse lead manually caught an order headed to the wrong facility. Rather than present the transition as seamless, Marisol emailed top accounts about possible hiccups and gave them a direct contact. Two customers thanked her for admitting the risk.",
+          "narrator": "Marisol Vance",
+          "people": ["Marisol Vance", "warehouse lead", "top-account customers"],
+          "setup": "Vance & Kinder was switching inventory systems.",
+          "tension": "The overlapping systems nearly sent an order to the wrong facility.",
+          "action": "After the manual catch, Marisol proactively warned top customers and provided a direct contact.",
+          "outcome": "Customers responded positively to the transparency.",
+          "lesson": "Telling customers about risk early can build trust.",
+          "related_evidence_hints": ["two-day window", "two customer replies", "bad news doesn't get better with age"],
+          "excerpt": "We caught it, but only because our warehouse lead double-checked manually out of habit. So instead of pretending it was seamless, I just sent an email to our top accounts saying, hey, we're switching systems, there might be a hiccup or two this month, here's who to call directly if anything looks off.",
+          "source_location": "transcript:80.04-111.22",
+          "scope": "personal",
+          "confidence": 0.99
+        },
+        {
+          "summary": "Marisol used a transparent explanation for an 8% steel-related price increase, lost one small account, and received thanks from larger customers for being direct.",
+          "full_story": "Vance & Kinder needed to raise prices 8% because of steel tariffs. Marisol sent a short letter showing the actual cost increase the company had absorbed and avoided vague market-condition language. One small account left, while larger customers thanked the company for being upfront.",
+          "narrator": "Marisol Vance",
+          "people": ["Marisol Vance", "Vance & Kinder customers"],
+          "setup": "Steel tariffs forced Vance & Kinder to raise prices.",
+          "tension": "Marisol expected difficult customer reactions.",
+          "action": "She explained the exact reason and showed the absorbed cost increase.",
+          "outcome": "One small account left, but larger customers appreciated the honesty.",
+          "lesson": "Specific transparency can protect trust even when the message is unwelcome.",
+          "related_evidence_hints": ["8%", "one small account"],
+          "excerpt": "Same thing, I think. I sent a short letter explaining exactly why, showed the actual cost increase we were absorbing, and didn't try to hide behind vague language like market conditions.",
+          "source_location": "transcript:188.25-224.72",
+          "scope": "personal",
+          "confidence": 0.98
+        }
+      ],
+      "warnings": []
+    },
+    "voice_profile": {
+      "markdown": "# Voice Profile\n\n## Natural spoken voice\nMarisol is candid, practical, conversational, and lightly self-deprecating. She uses concrete operational details, fragments for emphasis, and dry humor: ‘I finished! Barely.’ She is comfortable admitting uncertainty and mistakes.\n\n## LinkedIn writing preferences\nUse specific figures and real operational stakes. Keep the language plain and avoid smoothing difficult outcomes into success-only narratives.\n\n## Recurring beliefs and perspectives\nReliability beats price. Leaders should normalize small beginnings. Bad news should be communicated early and specifically. Transparent explanations earn trust even when the answer is unwelcome.\n\n## Positive examples\n- ‘We can't always win on price, steel's steel, but we can win on your stuff shows up when we say it will.’\n- ‘I finished! Barely.’\n- ‘I was honestly dreading those calls.’\n\n## Avoid\n- Inflating approximate numbers into exact claims.\n- Corporate euphemisms such as ‘market conditions’ when a concrete explanation exists.\n- Removing her dry humor or controlled imperfections.\n\n## Evidence\n- transcript:126.96-148.14\n- transcript:20.35-35.64\n- transcript:147.97-162.68\n- transcript:174.29-184.29\n- transcript:188.25-224.72",
+      "supporting_locations": ["transcript:20.35-35.64", "transcript:147.97-162.68", "transcript:174.29-184.29", "transcript:188.25-224.72"],
+      "confidence": 0.94
+    }
+  },
+  "SYNTHREAD0001": {
+    "intake": {
+      "source_type": "client_review_email",
+      "purpose": "Capture client approval and editing preferences",
+      "relevance": "relevant",
+      "scope": "personal",
+      "speakers": ["Marisol Vance", "Jarrich Grey"],
+      "clarification_questions": [],
+      "notes": ["The client explicitly approves two posts after a factual precision edit."]
+    },
+    "metric": {
+      "records": [
+        {
+          "metric_type": "customer_relationship_duration",
+          "value_text": "nine years",
+          "normalized_value": 9,
+          "unit": "years",
+          "subject": "Meridian's previous supplier relationship",
+          "context": "Marisol explicitly corrects a draft from 'a decade' to the actual nine-year figure.",
+          "excerpt": "On the Meridian post, can we say \"nine years with their previous supplier\" instead of just \"a decade\" — nine is the actual number and it's a better detail anyway.",
+          "source_location": "email:SYNMSG00012",
+          "scope": "personal",
+          "confidence": 0.99
+        }
+      ],
+      "warnings": []
+    },
+    "quote": {
+      "records": [
+        {
+          "quote_text": "nine is the actual number and it's a better detail anyway",
+          "speaker": "Marisol Vance",
+          "speaker_type": "client",
+          "quote_type": "direct",
+          "context": "Marisol states a preference for accurate, specific figures in draft editing.",
+          "excerpt": "On the Meridian post, can we say \"nine years with their previous supplier\" instead of just \"a decade\" — nine is the actual number and it's a better detail anyway.",
+          "source_location": "email:SYNMSG00012",
+          "scope": "personal",
+          "confidence": 0.99
+        }
+      ],
+      "warnings": []
+    },
+    "anecdote": {
+      "records": [],
+      "warnings": []
+    },
+    "voice_profile": {
+      "markdown": "# Voice Profile\n\n## Natural spoken voice\nMarisol is candid, practical, conversational, and lightly self-deprecating. She uses concrete operational details, fragments for emphasis, and dry humor. She is comfortable admitting uncertainty and mistakes.\n\n## LinkedIn writing preferences\nUse exact, specific figures when the source provides them. Preserve her actual details rather than rounding ‘nine years’ into ‘a decade.’ Client-approved stories may retain humor, but posts requiring an unavailable real photo should be held rather than paired with a generic asset.\n\n## Recurring beliefs and perspectives\nReliability beats price. Leaders should normalize small beginnings. Bad news should be communicated early and specifically. Transparent explanations earn trust even when the answer is unwelcome.\n\n## Positive examples\n- ‘We can't always win on price, steel's steel, but we can win on your stuff shows up when we say it will.’\n- ‘I finished! Barely.’\n- ‘Nine is the actual number and it's a better detail anyway.’\n\n## Avoid\n- Rounding exact facts into conventional phrases.\n- Corporate euphemisms when a concrete explanation exists.\n- Stock imagery when the post depends on a real personal moment.\n- Removing her dry humor or controlled imperfections.\n\n## Evidence\n- transcript:126.96-148.14\n- transcript:20.35-35.64\n- transcript:188.25-224.72\n- email:SYNMSG00012",
+      "supporting_locations": ["email:SYNMSG00012"],
+      "confidence": 0.97
+    }
+  },
+  "SYNTHREAD0002": {
+    "intake": {
+      "source_type": "scheduling_email",
+      "purpose": "Reschedule a meeting",
+      "relevance": "irrelevant",
+      "scope": "client_associated",
+      "speakers": ["Jarrich Grey"],
+      "clarification_questions": [],
+      "notes": ["Contains logistics only and should not enter writing retrieval."]
+    }
+  }
+}
