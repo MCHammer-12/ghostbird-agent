@@ -137,3 +137,10 @@ Join table for the many-to-many relationship between uploads and tags.
 - The required human review before a post can be published.
 - How writers will rate usefulness, correctness, authenticity, and voice match.
 - Whether the primary experience is an embedded product chat, deterministic app screens, or an external private agent.
+
+## Project notes
+
+- [Product decisions](docs/PRODUCT_DECISIONS.md)
+- [Ghostbird research](docs/GHOSTBIRD_RESEARCH.md)
+- [MCP and agent prompt guide](docs/MCP_AGENT_GUIDE.md)
+- [Demo plan](docs/DEMO.md)

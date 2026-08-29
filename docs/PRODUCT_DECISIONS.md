@@ -1,0 +1,39 @@
+# Product decisions
+
+## Adaptive clarification during ingestion
+
+The ingestion service should parse an upload before publishing extracted evidence. A clarification agent asks questions only when missing or ambiguous information would materially affect attribution, client relevance, or safe use.
+
+Examples:
+
+- What is the purpose of this upload for this client?
+- Who are the speakers?
+- Is this a personal client story, something associated with the client, or external inspiration?
+- May quoted material be attributed to the named speaker?
+
+Ask at most three high-value questions in one batch. The user may skip them. Skipped or unresolved information remains `unknown` or `needs_review` and cannot be presented as a verified client fact or direct client quote.
+
+Do not interrupt clear uploads. If the client, source type, speakers, and purpose can be inferred confidently, ingestion should continue without questions.
+
+## Voice-observation agent
+
+Add a voice-observation agent alongside the metric, quote, and anecdote agents. It extracts evidence-backed observations about vocabulary, cadence, directness, humor, sentence structure, storytelling, formatting, hooks, closers, and client corrections.
+
+Voice inputs should be weighted by what they are best able to prove:
+
+- Call transcripts and audio-derived transcripts are strongest for natural phrasing, vocabulary, cadence, humor, opinions, and storytelling.
+- Approved or published LinkedIn posts are strongest for channel-specific structure, formatting, hooks, length, punctuation, and polish.
+- Client edits are strongest for hard preferences, boundaries, and negative rules.
+- AI-generated drafts, third-party writing, and unverified material are not voice evidence unless explicitly approved by the client.
+
+The voice profile must retain links to supporting examples and distinguish spoken voice from approved written voice.
+
+## Configurable writing workflow
+
+Ghostbird can provide a useful default workflow: retrieve evidence, propose distinct angles or hooks, let the writer select a direction, draft, and validate. This sequence should be configurable rather than hardcoded because the agency may already have its own ideation, framework, review, and approval process.
+
+The retrieval and evidence layer is the durable product. Workflow recipes, prompts, framework tags, and review steps should be replaceable without changing the underlying client context store.
+
+## Human review
+
+Generated posts and extracted voice rules require human review before publication or promotion into an authoritative client profile. The system supports the ghostwriter's process; it does not silently replace agency judgment.
