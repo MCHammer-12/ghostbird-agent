@@ -136,6 +136,7 @@ function selectClient(clientId) {
   $("#clientPronoun").textContent = client.pronoun;
   $("#sourceClientName").textContent = `${client.firstName}.`;
   $("#voiceClientName").textContent = client.firstName;
+  $$('[data-client-first-name]').forEach((element) => { element.textContent = client.firstName; });
   $("#sourceTotal").textContent = String(client.sourceCount);
   $("#sourceNavCount").textContent = String(client.sourceCount);
   $(".markdown-editor textarea").value = voiceProfiles[clientId] || client.voice;
@@ -203,6 +204,9 @@ function selectMode(nextMode) {
   $('#writingPrompt').value = draftsByClient[activeClient][nextMode];
   $('#composerHint').textContent = mode.hint;
   $('#generateLabel').textContent = mode.label;
+  $$('[data-mode-output]').forEach((output) => {
+    output.hidden = output.dataset.modeOutput !== nextMode;
+  });
   syncWorkspaceOutputs();
 }
 $$('.mode').forEach((button) => button.addEventListener('click', () => selectMode(button.dataset.mode)));

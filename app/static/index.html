@@ -50,16 +50,16 @@
             <button class="outline-button" id="openUpload"><span>＋</span> Add source</button>
           </header>
 
-          <section class="use-case-grid" aria-label="Choose a writing task">
-            <button class="mode use-case active" id="enrichTab" data-mode="enrich" aria-pressed="true">
-              <span class="use-case-number">01</span><span class="use-case-icon">↗</span>
-              <span class="use-case-copy"><span class="eyebrow">Start with a draft</span><strong>Enrich a post</strong><small>Make a rough thought feel specific and unmistakably hers.</small></span>
-              <span class="use-case-points"><span>Real metrics, stories &amp; quotes</span><span>Voice cues that keep it on-brand</span></span>
+          <section class="writing-choices" aria-label="Choose a writing task">
+            <button class="mode writing-choice active" id="enrichTab" data-mode="enrich" aria-pressed="true">
+              <span class="choice-title">Enrich a draft</span>
+              <span class="choice-description">You have a partial post. Make it more specific without losing the writer’s point of view.</span>
+              <span class="choice-outcomes"><span>Source-backed details that belong in the post</span><span>Voice cues that keep the draft recognizably <span data-client-first-name>Marisol</span></span></span>
             </button>
-            <button class="mode use-case" id="createTab" data-mode="create" aria-pressed="false">
-              <span class="use-case-number">02</span><span class="use-case-icon">✦</span>
-              <span class="use-case-copy"><span class="eyebrow">Start with an idea</span><strong>Create a new post</strong><small>Turn a topic into a grounded direction worth writing.</small></span>
-              <span class="use-case-points"><span>Find an angle from client context</span><span>Build a solid first draft to shape</span></span>
+            <button class="mode writing-choice" id="createTab" data-mode="create" aria-pressed="false">
+              <span class="choice-title">Create from context</span>
+              <span class="choice-description">You have a topic, or a blank page. Start from something <span data-client-first-name>Marisol</span> has actually said or done.</span>
+              <span class="choice-outcomes"><span>A story, tension, or point of view worth writing about</span><span>A grounded first draft to shape with the writer</span></span>
             </button>
           </section>
 
@@ -99,17 +99,44 @@ They’re built in the moments when you have to tell someone something they don�
             </div>
           </section>
 
-          <section class="draft-section" data-marisol-context hidden>
-            <div class="section-heading"><div><p class="eyebrow">A possible direction</p><h2>Built from the pieces above</h2></div><div class="draft-actions"><button class="icon-button" aria-label="Copy draft">⧉</button><button class="icon-button" aria-label="More draft actions">•••</button></div></div>
-            <article class="draft-card">
-              <p>The best customer relationships aren’t built when everything goes right.</p>
-              <p>They’re built in the moments when you have to tell someone something they don’t want to hear.</p>
-              <p>When we switched inventory systems, we had a two-day window where both systems were half-working. We almost shipped an order to the wrong facility.</p>
-              <p>We caught it. Then we told our top customers what was happening before they found out the hard way. <button class="citation" data-evidence="erp">[1]</button></p>
-              <p>Two of them wrote back just to say thanks for the heads up.</p>
-              <p>My dad always said, “Bad news doesn’t get better with age.” <button class="citation" data-evidence="dad">[2]</button> I finally understand what he meant.</p>
-              <p class="draft-note"><span>✦</span> Editorial draft. Verify details and make it yours before sending.</p>
-            </article>
+          <section class="draft-section comparison-section" data-marisol-context hidden>
+            <div class="section-heading"><div><p class="eyebrow">Demo comparison</p><h2>What client context changes</h2></div></div>
+            <div class="comparison-grid" data-mode-output="enrich">
+              <article class="comparison-card baseline-card">
+                <div class="comparison-label"><span>Without client context</span><small>General model</small></div>
+                <p>The strongest customer relationships aren’t built when everything goes right.</p>
+                <p>They’re built during challenges. Good leaders communicate early, stay transparent, and focus on solutions.</p>
+                <p>Trust comes from honesty, especially when the conversation is difficult.</p>
+                <footer>No client stories, voice profile, or source references</footer>
+              </article>
+              <article class="comparison-card context-card">
+                <div class="comparison-label"><span>With Ghostbird context</span><small>8 client sources</small></div>
+                <p>The best customer relationships aren’t built when everything goes right.</p>
+                <p>They’re built in the moments when you have to tell someone something they don’t want to hear.</p>
+                <p>When we switched inventory systems, we had a two-day window where both systems were half-working. We almost shipped an order to the wrong facility.</p>
+                <p>We caught it. Then we told our top customers what was happening before they found out the hard way. <button class="citation" data-evidence="erp">[1]</button></p>
+                <p>Two of them wrote back just to say thanks for the heads up.</p>
+                <p>My dad always said, “Bad news doesn’t get better with age.” <button class="citation" data-evidence="dad">[2]</button> I finally understand what he meant.</p>
+                <footer><span>✦</span> Grounded in Marisol’s stories and voice</footer>
+              </article>
+            </div>
+            <div class="comparison-grid" data-mode-output="create" hidden>
+              <article class="comparison-card baseline-card">
+                <div class="comparison-label"><span>Without client context</span><small>General model</small></div>
+                <h3>Why transparency builds trust</h3>
+                <p><b>Hook:</b> Leadership isn’t about pretending everything is perfect.</p>
+                <p><b>Angle:</b> Share a general lesson about communicating openly during operational change.</p>
+                <footer>No client-specific proof or source references</footer>
+              </article>
+              <article class="comparison-card context-card">
+                <div class="comparison-label"><span>With Ghostbird context</span><small>8 client sources</small></div>
+                <h3>Bad news doesn’t get better with age</h3>
+                <p><b>Hook:</b> We almost shipped a customer’s order to the wrong facility.</p>
+                <p><b>Angle:</b> Tell the story of Marisol’s two-day ERP transition, why she warned her top accounts first, and how two customers thanked her for admitting the risk. <button class="citation" data-evidence="erp">[1]</button></p>
+                <p><b>Voice cue:</b> Close with her father’s line instead of a polished leadership maxim. <button class="citation" data-evidence="dad">[2]</button></p>
+                <footer><span>✦</span> Grounded in Marisol’s stories and voice</footer>
+              </article>
+            </div>
           </section>
           <section class="empty-context" id="emptyWorkspaceContext" hidden>
             <p class="eyebrow">Writing context</p><h2>Start with a source.</h2><p>This demo has prepared context for Marisol. Add a source to build an isolated workspace for this client.</p><button class="outline-button empty-upload">＋ Add source</button>
