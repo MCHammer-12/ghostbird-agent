@@ -14,6 +14,8 @@ def get_ghostbird_service() -> GhostbirdService:
     model = ConfiguredStructuredModel(LLMClient(settings))
     if settings.supabase_url and settings.supabase_service_role_key:
         repository = SupabaseEvidenceRepository(SupabaseClient(settings))
-    else:
+    elif settings.environment in {"development", "test"}:
         repository = InMemoryEvidenceRepository()
+    else:
+        raise RuntimeError("Supabase is required outside development and test")
     return GhostbirdService(model, repository)
