@@ -29,7 +29,7 @@ async def demo_enrich_post(
     _: None = Depends(require_local_demo),
     service: GhostbirdService = Depends(get_ghostbird_service),
 ) -> EnrichedPost:
-    return await service.enrich(client_id, body)
+    return await service.enrich(client_id, body, verify_output=False)
 
 
 @router.post("/posts:ideate", response_model=IdeationResult)
@@ -39,7 +39,7 @@ async def demo_ideate_posts(
     _: None = Depends(require_local_demo),
     service: GhostbirdService = Depends(get_ghostbird_service),
 ) -> IdeationResult:
-    return await service.ideate(client_id, body)
+    return await service.ideate(client_id, body, verify_output=False)
 
 
 @router.get("/evidence/{evidence_id}", response_model=StoredEvidence)

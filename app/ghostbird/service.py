@@ -93,7 +93,12 @@ class GhostbirdService:
             await self.repository.set_source_status(source.client_id, source.source_id, "failed")
             raise
 
-    async def enrich(self, client_id: str, request: EnrichmentInput) -> EnrichedPost:
+    async def enrich(
+        self,
+        client_id: str,
+        request: EnrichmentInput,
+        verify_output: bool = True,
+    ) -> EnrichedPost:
         evidence = await self.repository.search_evidence(client_id, request.draft_text, 12)
         profile = await self.repository.get_voice_profile(client_id)
         result = await self.model.run(
@@ -106,11 +111,18 @@ class GhostbirdService:
             },
         )
         self._verify_references(result, {record.evidence_id for record in evidence})
+        if not verify_output:
+            return result
         verification = await self._verify_output(result, evidence)
         self._require_valid_output(verification)
         return result.model_copy(update={"verification": verification})
 
-    async def ideate(self, client_id: str, request: IdeationInput) -> IdeationResult:
+    async def ideate(
+        self,
+        client_id: str,
+        request: IdeationInput,
+        verify_output: bool = True,
+    ) -> IdeationResult:
         query = " ".join(value for value in (request.topic, request.audience, request.goal) if value)
         evidence = await self.repository.search_evidence(client_id, query, 16)
         profile = await self.repository.get_voice_profile(client_id)
@@ -140,6 +152,8 @@ class GhostbirdService:
                     "ghostbird",
                     f"Idea basis {idea.basis} has no supporting evidence of that kind",
                 )
+        if not verify_output:
+            return result
         verification = await self._verify_output(result, evidence)
         self._require_valid_output(verification)
         return result.model_copy(update={"verification": verification})
