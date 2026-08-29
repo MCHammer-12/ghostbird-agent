@@ -1,8 +1,12 @@
 import unittest
+from unittest.mock import patch
 from typing import TypeVar
 
 from pydantic import BaseModel
+from fastapi.testclient import TestClient
 
+from app.dependencies.ghostbird import get_ghostbird_service
+from app.config import get_settings
 from app.ghostbird.models import (
     EnrichedPost,
     EnrichmentInput,
@@ -10,6 +14,7 @@ from app.ghostbird.models import (
     EvidenceScope,
     IdeationInput,
     IntakeAnalysis,
+    IngestionResult,
     ReviewStatus,
     SourceDocument,
     StoredEvidence,
@@ -304,12 +309,61 @@ class GhostbirdApiContractTests(unittest.TestCase):
             "/v1/clients/{client_id}",
             "/v1/clients/{client_id}/uploads",
             "/v1/clients/{client_id}/tags",
+            "/v1/clients/{client_id}/sources",
             "/v1/clients/{client_id}/voice-profile",
             "/v1/clients/{client_id}/posts:enrich",
             "/v1/clients/{client_id}/posts:ideate",
             "/v1/clients/{client_id}/posts:draft",
         }
         self.assertTrue(expected.issubset(paths))
+
+    def test_source_import_validates_and_ingests(self) -> None:
+        source = load_marisol_sources()[0]
+
+        class StubService:
+            async def ingest(self, received: SourceDocument) -> IngestionResult:
+                self.received = received
+                return IngestionResult(
+                    client_id=received.client_id,
+                    source_id=received.source_id,
+                    status="ready",
+                    intake=IntakeAnalysis(
+                        source_type=received.source_type,
+                        relevance="relevant",
+                    ),
+                )
+
+        service = StubService()
+        app.dependency_overrides[get_ghostbird_service] = lambda: service
+        try:
+            with patch.dict(
+                "os.environ",
+                {
+                    "API_KEY": "test-key",
+                    "LLM_PROVIDER": "anthropic",
+                    "ANTHROPIC_API_KEY": "test-key",
+                },
+            ):
+                get_settings.cache_clear()
+                with TestClient(app) as client:
+                    response = client.post(
+                        f"/v1/clients/{source.client_id}/sources",
+                        headers={"X-API-Key": "test-key"},
+                        json=source.model_dump(mode="json", exclude={"client_id"}),
+                    )
+                    invalid = client.post(
+                        f"/v1/clients/{source.client_id}/sources",
+                        headers={"X-API-Key": "test-key"},
+                        json={"source_id": "", "title": "", "source_type": "", "text": ""},
+                    )
+        finally:
+            app.dependency_overrides.clear()
+            get_settings.cache_clear()
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual("ready", response.json()["status"])
+        self.assertEqual(source.client_id, service.received.client_id)
+        self.assertEqual(422, invalid.status_code)
 
 
 if __name__ == "__main__":

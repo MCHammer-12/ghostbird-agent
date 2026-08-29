@@ -10,9 +10,11 @@ from app.ghostbird.models import (
     EnrichmentInput,
     IdeationInput,
     IdeationResult,
+    IngestionResult,
+    SourceDocument,
 )
 from app.ghostbird.service import GhostbirdService
-from app.schemas.ghostbird import VoiceProfileResponse
+from app.schemas.ghostbird import SourceImportRequest, VoiceProfileResponse
 
 
 router = APIRouter(
@@ -24,6 +26,21 @@ router = APIRouter(
 def _require_llm() -> None:
     if not get_settings().llm_configured():
         raise HTTPException(status_code=503, detail="LLM provider key not configured")
+
+
+@router.post("/sources", response_model=IngestionResult)
+async def import_source(
+    body: SourceImportRequest,
+    client_id: str = Depends(require_client_access),
+    service: GhostbirdService = Depends(get_ghostbird_service),
+) -> IngestionResult:
+    _require_llm()
+    return await service.ingest(
+        SourceDocument(
+            client_id=client_id,
+            **body.model_dump(mode="json"),
+        )
+    )
 
 
 @router.get("/voice-profile", response_model=VoiceProfileResponse)
