@@ -1,0 +1,20 @@
+{
+  "threadId": "SYNTHREAD0002",
+  "subject": "Quick reschedule for our content interview?",
+  "messages": [
+    {
+      "id": "SYNMSG00021",
+      "threadId": "SYNTHREAD0002",
+      "date": "2026-08-17T15:10:00Z",
+      "subject": "Quick reschedule for our content interview?",
+      "sender": "jarrich@ghostbirdagency.com",
+      "toRecipients": ["marisol@vanceandkinder.com"],
+      "ccRecipients": [],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Hi Marisol,\n\nQuick one — I've got a scheduling conflict Tuesday at 1pm when we normally do our monthly call. Any chance we could push to 2pm the same day, or would Wednesday morning work better on your end?\n\nLet me know whichever's easier and I'll send a new invite.\n\nThanks,\nJarrich Grey\nGhostbird Agency\njarrich@ghostbirdagency.com",
+      "snippet": "Hi Marisol, Quick one — I've got a scheduling conflict Tuesday at 1pm when we normally do our monthly call. Any chance we could push to 2pm "
+    }
+  ],
+  "_synthetic_data_notice": "This email thread is 100% fictional sample data generated for app development / testing. No real client, message, or person is represented.",
+  "_client_ref": "vance_kinder"
+}

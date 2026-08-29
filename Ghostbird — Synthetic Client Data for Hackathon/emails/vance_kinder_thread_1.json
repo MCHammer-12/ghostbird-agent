@@ -1,0 +1,44 @@
+{
+  "threadId": "SYNTHREAD0001",
+  "subject": "Your September Posts for Review",
+  "messages": [
+    {
+      "id": "SYNMSG00011",
+      "threadId": "SYNTHREAD0001",
+      "date": "2026-07-13T16:05:00Z",
+      "subject": "Your September Posts for Review",
+      "sender": "jarrich@ghostbirdagency.com",
+      "toRecipients": ["marisol@vanceandkinder.com"],
+      "ccRecipients": ["ryan@ghostbirdagency.com"],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Hi Marisol,\n\nHope the week's treating you well! Here are the three posts from our last call:\n\n1. The \"put your dad on the phone\" story\n2. The Meridian Air Systems lead-time win\n3. Colton's first close (mentoring angle)\n\nYou can review all three here: [link to shared doc]\n\nTake a look whenever you get a chance, no rush, but if we can get your notes by Friday I can have these scheduled for next week.\n\nTalk soon,\nJarrich Grey\nGhostbird Agency\njarrich@ghostbirdagency.com",
+      "snippet": "Hi Marisol, Hope the week's treating you well! Here are the three posts from our last call: 1. The \"put your dad on the phone\" story 2. The "
+    },
+    {
+      "id": "SYNMSG00012",
+      "threadId": "SYNTHREAD0001",
+      "date": "2026-07-14T14:22:00Z",
+      "subject": "Re: Your September Posts for Review",
+      "sender": "marisol@vanceandkinder.com",
+      "toRecipients": ["jarrich@ghostbirdagency.com"],
+      "ccRecipients": ["ryan@ghostbirdagency.com"],
+      "labelIds": ["INBOX", "IMPORTANT"],
+      "plaintext_body": "Hi Jarrich,\n\nThese are great! The dad story made me laugh out loud, you captured it exactly right.\n\nTwo small notes:\n- On the Meridian post, can we say \"nine years with their previous supplier\" instead of just \"a decade\" — nine is the actual number and it's a better detail anyway.\n- Let's hold the marathon post like we talked about, I still don't have a finish line photo yet (race is in three weeks).\n\nGo ahead and schedule the other two once that tweak is in.\n\nThanks!\nMarisol",
+      "snippet": "Hi Jarrich, These are great! The dad story made me laugh out loud, you captured it exactly right. Two small notes: - On the Meridian post, c"
+    },
+    {
+      "id": "SYNMSG00013",
+      "threadId": "SYNTHREAD0001",
+      "date": "2026-07-14T15:40:00Z",
+      "subject": "Re: Your September Posts for Review",
+      "sender": "jarrich@ghostbirdagency.com",
+      "toRecipients": ["marisol@vanceandkinder.com"],
+      "ccRecipients": ["ryan@ghostbirdagency.com"],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Perfect, made that change, \"nine years\" is a much better detail, good catch.\n\nI'll hold the marathon post until you send the photo. I'll schedule the dad story and the Meridian post for Tuesday and Thursday next week.\n\nTalk soon,\nJarrich Grey\nGhostbird Agency\njarrich@ghostbirdagency.com",
+      "snippet": "Perfect, made that change, \"nine years\" is a much better detail, good catch. I'll hold the marathon post until you send the photo. I'll sche"
+    }
+  ],
+  "_synthetic_data_notice": "This email thread is 100% fictional sample data generated for app development / testing. No real client, message, or person is represented.",
+  "_client_ref": "vance_kinder"
+}

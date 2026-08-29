@@ -1,0 +1,32 @@
+{
+  "threadId": "SYNTHREAD0003",
+  "subject": "Bloom & Bar September Posts — Ready for Your Review",
+  "messages": [
+    {
+      "id": "SYNMSG00031",
+      "threadId": "SYNTHREAD0003",
+      "date": "2026-07-17T18:00:00Z",
+      "subject": "Bloom & Bar September Posts — Ready for Your Review",
+      "sender": "jarrich@ghostbirdagency.com",
+      "toRecipients": ["priya@bloombaraesthetics.com"],
+      "ccRecipients": [],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Hi Priya,\n\nHope the recital went great! Here are the four posts from our last call:\n\n1. The origin story (your parents' salon)\n2. The day-one welcome call habit\n3. The 35-location milestone\n4. \"Juggling, not balancing\"\n\nYou can review them here: [link to shared doc]\n\nWhenever you get a minute, thanks!\n\nJarrich Grey\nGhostbird Agency\njarrich@ghostbirdagency.com",
+      "snippet": "Hi Priya, Hope the recital went great! Here are the four posts from our last call: 1. The origin story (your parents' salon) 2. The day-one "
+    },
+    {
+      "id": "SYNMSG00032",
+      "threadId": "SYNTHREAD0003",
+      "date": "2026-07-18T13:47:00Z",
+      "subject": "Re: Bloom & Bar September Posts — Ready for Your Review",
+      "sender": "priya@bloombaraesthetics.com",
+      "toRecipients": ["jarrich@ghostbirdagency.com"],
+      "ccRecipients": [],
+      "labelIds": ["INBOX", "IMPORTANT"],
+      "plaintext_body": "Hi Jarrich,\n\nI actually sent the origin story one to my mom before I even finished reading it myself, and she cried a little, so I think you nailed it.\n\nOne small edit — on the \"juggling, not balancing\" post, can we cut the line about the toenail-painting story down a bit? Loved it on the call, feels like slightly too much detail in writing.\n\nEverything else is good to schedule as is!\n\nPriya",
+      "snippet": "Hi Jarrich, I actually sent the origin story one to my mom before I even finished reading it myself, and she cried a little, so I think you "
+    }
+  ],
+  "_synthetic_data_notice": "This email thread is 100% fictional sample data generated for app development / testing. No real client, message, or person is represented.",
+  "_client_ref": "bloom_bar"
+}

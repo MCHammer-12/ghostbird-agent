@@ -1,0 +1,52 @@
+{
+  "id": "SYN01A7F3K9M2QW8B4XN6P0RTE",
+  "title": "Vance & Kinder x Ghostbird Content Interview",
+  "dateString": "2026-08-20T17:00:00.000Z",
+  "duration": 6.11,
+  "organizerEmail": "jarrich@ghostbirdagency.com",
+  "meetingLink": "https://meet.google.com/syn-fake-0002",
+  "meetingAttendees": [
+    { "displayName": null, "email": "marisol@vanceandkinder.com" },
+    { "displayName": null, "email": "jarrich@ghostbirdagency.com" }
+  ],
+  "participants": ["marisol@vanceandkinder.com", "jarrich@ghostbirdagency.com"],
+  "meetingInfo": { "fred_joined": true, "silent_meeting": false, "summary_status": "processed" },
+  "summary": {
+    "short_summary": "Follow-up call: Marisol finished her half marathon (with a mid-race cramping story) and the finish-line photo is ready to use. The ERP system migration hit a near-miss shipping error, caught manually by a warehouse lead; instead of hiding it, Marisol proactively emailed top accounts about the transition, which was well received. A related 8% price increase (steel tariffs) was also handled with a transparent letter to customers, again landing well apart from one lost small account. New rep Colton closed his first cold-LinkedIn deal. Marisol is considering a bigger-than-usual holiday gesture for her top twenty accounts for Q4 content.",
+    "keywords": ["transparency", "price increase", "ERP rollout", "customer retention", "LinkedIn lead generation", "Q4 planning"],
+    "action_items": "\n**Jarrich Grey**\nDraft the ERP-transparency story, the price-increase transparency story, and the Colton LinkedIn-close post; send drafts by Thursday (00:26)\nFollow up separately to brainstorm the Q4 top-customer holiday gesture once Marisol decides on an idea (00:25)\n\n**Marisol Vance**\nDecide on a concept for the Q4 top-twenty-customer holiday gesture (00:24)\n"
+  },
+  "sentences": [
+    {"speaker_name": "Jarrich Grey", "start_time": 0.0, "end_time": 3.53, "text": "Hey! How'd the half marathon go?"},
+    {"speaker_name": "Marisol Vance", "start_time": 4.63, "end_time": 16.39, "text": "I finished! Barely. I cramped so bad at mile ten I thought Dave was going to have to carry me."},
+    {"speaker_name": "Jarrich Grey", "start_time": 17.49, "end_time": 19.25, "text": "Did he offer?"},
+    {"speaker_name": "Marisol Vance", "start_time": 20.35, "end_time": 35.64, "text": "He offered. I told him if he touched me I'd never speak to him again, out of pure stubbornness I finished on my own two feet."},
+    {"speaker_name": "Jarrich Grey", "start_time": 36.74, "end_time": 52.62, "text": "Perfect, we already have that photo from you, so that one's basically ready to go. Okay, business update, how'd the ERP rollout end up? Disaster or win?"},
+    {"speaker_name": "Marisol Vance", "start_time": 53.72, "end_time": 76.66, "text": "Honestly, a little of both, but it turned into a good story. We had a two day window where the new system and old system were both half working, and we almost shipped an order to the wrong facility."},
+    {"speaker_name": "Jarrich Grey", "start_time": 77.76, "end_time": 78.94, "text": "Oh no."},
+    {"speaker_name": "Marisol Vance", "start_time": 80.04, "end_time": 111.22, "text": "We caught it, but only because our warehouse lead double-checked manually out of habit. So instead of pretending it was seamless, I just sent an email to our top accounts saying, hey, we're switching systems, there might be a hiccup or two this month, here's who to call directly if anything looks off."},
+    {"speaker_name": "Jarrich Grey", "start_time": 112.32, "end_time": 114.08, "text": "How'd that land?"},
+    {"speaker_name": "Marisol Vance", "start_time": 115.18, "end_time": 133.42, "text": "Way better than I expected. Two different customers wrote back just saying thanks for the heads up, one of them said most of their vendors would never admit something like that."},
+    {"speaker_name": "Jarrich Grey", "start_time": 134.52, "end_time": 146.87, "text": "That's such a good leadership story, the value of just telling people the truth before they find out the hard way."},
+    {"speaker_name": "Marisol Vance", "start_time": 147.97, "end_time": 162.68, "text": "Yeah, my dad actually used to say something like bad news doesn't get better with age, and I finally understood what he meant by that."},
+    {"speaker_name": "Jarrich Grey", "start_time": 163.78, "end_time": 173.19, "text": "Okay, love that line, we're using it. What else, didn't you also raise prices this quarter?"},
+    {"speaker_name": "Marisol Vance", "start_time": 174.29, "end_time": 184.29, "text": "We did, eight percent, because of the tariff stuff on steel. I was honestly dreading those calls."},
+    {"speaker_name": "Jarrich Grey", "start_time": 185.39, "end_time": 187.15, "text": "How'd it go?"},
+    {"speaker_name": "Marisol Vance", "start_time": 188.25, "end_time": 224.72, "text": "Same thing, I think. I sent a short letter explaining exactly why, showed the actual cost increase we were absorbing, and didn't try to hide behind vague language like market conditions. We lost one small account over it, but a couple of the bigger ones actually thanked us for being upfront instead of quietly padding invoices like some of our competitors do."},
+    {"speaker_name": "Jarrich Grey", "start_time": 225.82, "end_time": 242.88, "text": "That's a really strong pairing actually, the price increase story and the ERP story, both are basically the same lesson, transparency wins loyalty even when the news isn't great."},
+    {"speaker_name": "Marisol Vance", "start_time": 243.98, "end_time": 248.69, "text": "Never thought about it that way, but yeah."},
+    {"speaker_name": "Jarrich Grey", "start_time": 249.79, "end_time": 256.85, "text": "Anything with Colton? I remember he had his first close last time."},
+    {"speaker_name": "Marisol Vance", "start_time": 257.95, "end_time": 270.89, "text": "He's doing great. He actually just closed his first deal that came from a cold LinkedIn message, no warm intro at all."},
+    {"speaker_name": "Jarrich Grey", "start_time": 271.99, "end_time": 283.75, "text": "That's awesome, especially since your LinkedIn presence is part of why that lead probably trusted the company enough to respond."},
+    {"speaker_name": "Marisol Vance", "start_time": 284.85, "end_time": 290.14, "text": "I hadn't connected that dot, but that's probably true."},
+    {"speaker_name": "Jarrich Grey", "start_time": 291.24, "end_time": 301.83, "text": "Okay, one more thing before we wrap. Q4 is coming up, any specific ideas you've been sitting on?"},
+    {"speaker_name": "Marisol Vance", "start_time": 302.93, "end_time": 316.46, "text": "I've been wanting to do something for our top twenty customers around the holidays, more than just a card. Not sure what yet."},
+    {"speaker_name": "Jarrich Grey", "start_time": 317.56, "end_time": 338.15, "text": "We can brainstorm that separately, but it could actually make a good post too, behind the scenes of what we're sending our best customers this year, that kind of thing, once you land on it."},
+    {"speaker_name": "Marisol Vance", "start_time": 339.25, "end_time": 343.37, "text": "I like that. Okay let's do that."},
+    {"speaker_name": "Jarrich Grey", "start_time": 344.47, "end_time": 358.59, "text": "Great, so to recap, the ERP transparency story, the price increase story, and the Colton LinkedIn close. I'll have drafts to you by Thursday."},
+    {"speaker_name": "Marisol Vance", "start_time": 359.69, "end_time": 362.04, "text": "Perfect, thank you Jarrich."},
+    {"speaker_name": "Jarrich Grey", "start_time": 363.14, "end_time": 365.49, "text": "Thanks Marisol, talk soon!"}
+  ],
+  "_synthetic_data_notice": "This transcript is 100% fictional sample data generated for app development / testing. No real client, call, or person is represented.",
+  "_client_ref": "vance_kinder"
+}

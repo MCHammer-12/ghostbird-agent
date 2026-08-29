@@ -1,0 +1,49 @@
+{
+  "_notice": "SYNTHETIC / FICTIONAL SAMPLE DATA. Every client, person, company, call, and email in this dataset was invented for app development and testing purposes (Ghostbird Agency hackathon use case). It is modeled on the structure and tone of real Ghostbird client content interviews and client emails, but no real client is represented, referenced, or identifiable.",
+  "dataset_summary": {
+    "clients": 3,
+    "transcripts": 5,
+    "email_messages": 10,
+    "email_threads": 5
+  },
+  "clients": {
+    "vance_kinder": {
+      "display_name": "Marisol Vance",
+      "company": "Vance & Kinder Supply Co.",
+      "industry": "Industrial fasteners & specialty hardware distribution (B2B)",
+      "email": "marisol@vanceandkinder.com",
+      "bio": "Second-generation owner who took over her father's regional fastener distribution business six years ago and has grown it into a fast-scaling national supplier. Voice leans practical, plainspoken, proud of the family history, motivated by proving herself to longtime customers who remember her dad running the place.",
+      "cadence": "Monthly content interview"
+    },
+    "bloom_bar": {
+      "display_name": "Priya Chandrasekhar",
+      "company": "Bloom & Bar Aesthetics",
+      "industry": "Boutique med-spa / beauty franchise",
+      "email": "priya@bloombaraesthetics.com",
+      "bio": "Founder/CEO of a fast-growing beauty and wellness franchise, now at 35 locations. Grew up working in her immigrant parents' small salon and built Bloom & Bar to scale the 'she knows my name' feeling of a neighborhood shop. Voice is warm, candid about the messiness of founder life, big on franchisee culture and personal storytelling.",
+      "cadence": "Monthly content interview"
+    },
+    "ridgeline": {
+      "display_name": "Desmond Okafor",
+      "company": "Ridgeline Custom Builds",
+      "industry": "Custom home building / design-build",
+      "email": "desmond@ridgelinecustombuilds.com",
+      "bio": "Owner of a design-build custom home firm, trained by his framer father. Runs 5-7 projects at a time, values long-term client relationships over any single job, and coaches his kid's rec league basketball team on weekends. Voice is steady, a little dry, big on values passed down from his dad.",
+      "cadence": "Ad hoc / quarterly content interview"
+    }
+  },
+  "transcripts": [
+    { "id": "SYN01A7F3K9M2QW8B4XN6P0RTD", "slug": "vance_kinder_call_1", "title": "Vance & Kinder x Ghostbird Content Interview", "date": "2026-07-09T17:00:00.000Z", "duration_minutes": 10.03, "client_ref": "vance_kinder", "json_file": "transcripts/vance_kinder_call_1.json" },
+    { "id": "SYN01A7F3K9M2QW8B4XN6P0RTE", "slug": "vance_kinder_call_2", "title": "Vance & Kinder x Ghostbird Content Interview", "date": "2026-08-20T17:00:00.000Z", "duration_minutes": 6.11, "client_ref": "vance_kinder", "json_file": "transcripts/vance_kinder_call_2.json" },
+    { "id": "SYN02B8G4L0NX9C5YO7Q1SUFA", "slug": "bloom_bar_call_1", "title": "Bloom & Bar x Ghostbird Content Interview", "date": "2026-07-15T19:00:00.000Z", "duration_minutes": 8.12, "client_ref": "bloom_bar", "json_file": "transcripts/bloom_bar_call_1.json" },
+    { "id": "SYN02B8G4L0NX9C5YO7Q1SUFB", "slug": "bloom_bar_call_2", "title": "Bloom & Bar x Ghostbird Content Interview", "date": "2026-08-19T19:00:00.000Z", "duration_minutes": 6.32, "client_ref": "bloom_bar", "json_file": "transcripts/bloom_bar_call_2.json" },
+    { "id": "SYN03C9H5M1OY0D6ZP8R2TVGB", "slug": "ridgeline_call_1", "title": "Ridgeline Custom Builds x Ghostbird Content Interview", "date": "2026-08-05T16:30:00.000Z", "duration_minutes": 7.98, "client_ref": "ridgeline", "json_file": "transcripts/ridgeline_call_1.json" }
+  ],
+  "email_threads": [
+    { "thread_id": "SYNTHREAD0001", "slug": "vance_kinder_thread_1", "subject": "Your September Posts for Review", "message_count": 3, "client_ref": "vance_kinder", "json_file": "emails/vance_kinder_thread_1.json" },
+    { "thread_id": "SYNTHREAD0002", "slug": "vance_kinder_thread_2", "subject": "Quick reschedule for our content interview?", "message_count": 1, "client_ref": "vance_kinder", "json_file": "emails/vance_kinder_thread_2.json" },
+    { "thread_id": "SYNTHREAD0003", "slug": "bloom_bar_thread_1", "subject": "Bloom & Bar September Posts — Ready for Your Review", "message_count": 2, "client_ref": "bloom_bar", "json_file": "emails/bloom_bar_thread_1.json" },
+    { "thread_id": "SYNTHREAD0004", "slug": "bloom_bar_thread_2", "subject": "Need a Couple Photos for the Renee Spotlight Post", "message_count": 2, "client_ref": "bloom_bar", "json_file": "emails/bloom_bar_thread_2.json" },
+    { "thread_id": "SYNTHREAD0005", "slug": "ridgeline_thread_1", "subject": "Great Chatting Today — Here's What's Next", "message_count": 2, "client_ref": "ridgeline", "json_file": "emails/ridgeline_thread_1.json" }
+  ]
+}

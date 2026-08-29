@@ -1,0 +1,32 @@
+{
+  "threadId": "SYNTHREAD0005",
+  "subject": "Great Chatting Today — Here's What's Next",
+  "messages": [
+    {
+      "id": "SYNMSG00051",
+      "threadId": "SYNTHREAD0005",
+      "date": "2026-08-05T18:00:00Z",
+      "subject": "Great Chatting Today — Here's What's Next",
+      "sender": "ryan@ghostbirdagency.com",
+      "toRecipients": ["desmond@ridgelinecustombuilds.com"],
+      "ccRecipients": [],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Hi Desmond,\n\nReally enjoyed the call today. Three posts coming out of it:\n\n1. \"Measure the relationship, not the lumber\" — the story about the couple and the basement repair\n2. Design-build vs. separate architect breakdown\n3. The rec league basketball story\n\nI'll have drafts to you by early next week.\n\nThanks,\nRyan Cook\nGhostbird Agency\nryan@ghostbirdagency.com",
+      "snippet": "Hi Desmond, Really enjoyed the call today. Three posts coming out of it: 1. \"Measure the relationship, not the lumber\" — the story about the"
+    },
+    {
+      "id": "SYNMSG00052",
+      "threadId": "SYNTHREAD0005",
+      "date": "2026-08-06T12:30:00Z",
+      "subject": "Re: Great Chatting Today — Here's What's Next",
+      "sender": "desmond@ridgelinecustombuilds.com",
+      "toRecipients": ["ryan@ghostbirdagency.com"],
+      "ccRecipients": [],
+      "labelIds": ["INBOX", "IMPORTANT"],
+      "plaintext_body": "Hi Ryan,\n\nSounds good. One thing I forgot to mention on the call, the actual line my dad always used was \"measure the relationship, not just the lumber,\" so if you can keep the \"just\" in there that'd be great, it's really his exact words.\n\nMy site super is sending over updated mountain home photos this week too, I'll forward them once they land.\n\nDesmond",
+      "snippet": "Hi Ryan, Sounds good. One thing I forgot to mention on the call, the actual line my dad always used was \"measure the relationship, not just "
+    }
+  ],
+  "_synthetic_data_notice": "This email thread is 100% fictional sample data generated for app development / testing. No real client, message, or person is represented.",
+  "_client_ref": "ridgeline"
+}

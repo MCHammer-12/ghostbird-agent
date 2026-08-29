@@ -1,0 +1,32 @@
+{
+  "threadId": "SYNTHREAD0004",
+  "subject": "Need a Couple Photos for the Renee Spotlight Post",
+  "messages": [
+    {
+      "id": "SYNMSG00041",
+      "threadId": "SYNTHREAD0004",
+      "date": "2026-08-21T17:15:00Z",
+      "subject": "Need a Couple Photos for the Renee Spotlight Post",
+      "sender": "jarrich@ghostbirdagency.com",
+      "toRecipients": ["priya@bloombaraesthetics.com"],
+      "ccRecipients": [],
+      "labelIds": ["SENT"],
+      "plaintext_body": "Hi Priya,\n\nFollowing up on the Renee spotlight post from our call, once you've got her signed release, go ahead and send over a couple photos of her at her location whenever you can.\n\nAlso, the \"growth too fast\" lesson-learned post is up in the hub for your review when you have a sec.\n\nThanks!\nJarrich Grey\nGhostbird Agency\njarrich@ghostbirdagency.com",
+      "snippet": "Hi Priya, Following up on the Renee spotlight post from our call, once you've got her signed release, go ahead and send over a couple photos"
+    },
+    {
+      "id": "SYNMSG00042",
+      "threadId": "SYNTHREAD0004",
+      "date": "2026-08-22T20:03:00Z",
+      "subject": "Re: Need a Couple Photos for the Renee Spotlight Post",
+      "sender": "priya@bloombaraesthetics.com",
+      "toRecipients": ["jarrich@ghostbirdagency.com"],
+      "ccRecipients": [],
+      "labelIds": ["INBOX", "IMPORTANT"],
+      "plaintext_body": "Hi Jarrich,\n\nRelease is signed! Attaching three photos from her grand opening, feel free to use whichever works best.\n\nAlso, random thing, did you see the comment on last week's post asking about franchise costs? Wasn't sure if I should respond publicly or just DM them.\n\nPriya",
+      "snippet": "Hi Jarrich, Release is signed! Attaching three photos from her grand opening, feel free to use whichever works best. Also, random thing, did"
+    }
+  ],
+  "_synthetic_data_notice": "This email thread is 100% fictional sample data generated for app development / testing. No real client, message, or person is represented.",
+  "_client_ref": "bloom_bar"
+}
