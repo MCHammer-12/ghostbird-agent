@@ -163,6 +163,7 @@ class EnrichedPost(BaseModel):
 class PostIdea(BaseModel):
     title: str
     angle: str
+    basis: Literal["metric", "quote", "anecdote"]
     goal: Literal["reach", "trust", "convert"]
     hook: str
     supporting_evidence: list[EvidenceReference]

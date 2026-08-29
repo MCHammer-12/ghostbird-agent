@@ -96,12 +96,14 @@ class ValidWritingModel(RecordedMarisolModel):
             )
         if prompt_name == "ideate_post":
             count = payload["request"]["count"]
+            evidence_kind = payload["evidence"][0]["kind"]
             return output_model.model_validate(
                 {
                     "ideas": [
                         {
                             "title": f"Reliability is the strategy {index + 1}",
                             "angle": "Use an operational story to show how trust compounds.",
+                            "basis": evidence_kind,
                             "goal": "trust",
                             "hook": "The sale started a year before the buyer called.",
                             "supporting_evidence": [

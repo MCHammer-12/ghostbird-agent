@@ -41,7 +41,7 @@ PROMPT_VERSIONS = {
     "anecdote": "anecdote-v1",
     "voice_profile": "voice-profile-v1",
     "enrich_post": "enrich-post-v1",
-    "ideate_post": "ideate-post-v2",
+    "ideate_post": "ideate-post-v3",
     "draft_post": "draft-post-v1",
     "verify_output": "verify-output-v1",
 }
@@ -129,8 +129,17 @@ class GhostbirdService:
                 f"Ideation returned {len(result.ideas)} ideas; expected {request.count}",
             )
         allowed = {record.evidence_id for record in evidence}
+        evidence_kinds = {record.evidence_id: record.kind for record in evidence}
         for idea in result.ideas:
             self._verify_references(idea, allowed)
+            if not any(
+                evidence_kinds.get(reference.evidence_id) == idea.basis
+                for reference in idea.supporting_evidence
+            ):
+                raise IntegrationError(
+                    "ghostbird",
+                    f"Idea basis {idea.basis} has no supporting evidence of that kind",
+                )
         verification = await self._verify_output(result, evidence)
         self._require_valid_output(verification)
         return result.model_copy(update={"verification": verification})
