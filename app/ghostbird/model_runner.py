@@ -42,9 +42,8 @@ class ConfiguredStructuredModel:
             f"{json.dumps(payload, ensure_ascii=False)}\n"
             "</ghostbird_input>"
         )
-        response = await self.client.complete(user_prompt, system)
         try:
-            data = json.loads(response["content"])
+            data = await self.client.complete_json(system, user_prompt, output_model)
             return output_model.model_validate(data)
-        except (json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+        except (KeyError, TypeError, ValueError) as exc:
             raise IntegrationError("llm", f"Invalid structured output for {prompt_name}: {exc}") from exc
